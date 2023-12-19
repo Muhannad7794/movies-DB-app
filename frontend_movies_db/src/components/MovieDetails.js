@@ -8,8 +8,9 @@ function MovieDetails({ movie }) {
       {/* Display other movie details here */}
       <p>Genre: {movie.genre}</p>
       <p>Release Year: {movie.release_year}</p>
-      <p>Director: {movie.director}</p>
+      <p>Director: {movie.director.director_name}</p>
       <p>IMDB Score: {movie.credits_score}</p>
+      <p>Production Studio: {movie.studio.name}</p>
       
 
       {/* Add more details as needed */}
