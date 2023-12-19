@@ -21,6 +21,7 @@ class MovieInfoViewSet(viewsets.ModelViewSet):
         "director__director_name",
         "credits_score",
         "studio__name",
+        "studio__location"
     ]
     ordering_fields = ["title", "release_year", "credits_score"]
 
@@ -37,5 +38,5 @@ class StudiosViewSet(viewsets.ModelViewSet):
     queryset = Studios.objects.all()
     serializer_class = StudiosSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ["name"]
+    search_fields = ["name", "location"]
     ordering_fields = ["name", "founded"]
