@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import MovieItem from "./MovieItem";
 import MovieDetails from "./MovieDetails";
-import SearchBar from "./SearchBar";
-import Orders from "./Order"; // Import the Orders component
+import Orders from "./Order"; 
 import "./MovieList.css";
 
-function MovieList() {
+function MovieList({ searchTerm }) { // Receive searchTerm as a prop
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(""); // State to hold the search term
-  const [filter] = useState(""); // State for selected filter
   const [order, setOrder] = useState(""); // State for selected order
 
   useEffect(() => {
@@ -18,9 +15,6 @@ function MovieList() {
       let queryParts = [];
       if (searchTerm) {
         queryParts.push(`search=${encodeURIComponent(searchTerm)}`);
-      }
-      if (filter) {
-        queryParts.push(`filter=${encodeURIComponent(filter)}`);
       }
       if (order) {
         queryParts.push(`ordering=${encodeURIComponent(order)}`);
@@ -39,12 +33,7 @@ function MovieList() {
     };
 
     fetchMovies();
-  }, [searchTerm, filter, order]); // Depend on searchTerm, filter, and order
-
-  const handleSearch = (term) => {
-    setSelectedMovie(null);
-    setSearchTerm(term);
-  };
+  }, [searchTerm, order]); // Depend on searchTerm and order
 
   const handleOrderChange = (selectedOrder) => {
     setOrder(selectedOrder); // Update the order state
@@ -56,9 +45,7 @@ function MovieList() {
 
   return (
     <div>
-      <SearchBar onSearch={handleSearch} />
-      <Orders onOrderChange={handleOrderChange} />{" "}
-      {/* Add the order component */}
+      <Orders onOrderChange={handleOrderChange} /> {/* Add the order component */}
       <div className="movie-list">
         {selectedMovie ? (
           <MovieDetails movie={selectedMovie} />

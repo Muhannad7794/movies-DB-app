@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import DirectorItem from './DirectorItem';
-import DirectorDetails from './DirectorDetails'; // Import the DirectorDetails component
-import "./MovieList.css"; // Assuming you're using the same CSS as for MovieList
+import DirectorDetails from './DirectorDetails';
+import DirectorsOrder from './DirectorsOrder';
+import "./MovieList.css";
 
-function DirectorsList() {
+function DirectorsList({ searchTerm }) { // Receive searchTerm as a prop
   const [directors, setDirectors] = useState([]);
-  const [selectedDirector, setSelectedDirector] = useState(null); // State to track the selected director
+  const [selectedDirector, setSelectedDirector] = useState(null);
+  const [order, setOrder] = useState(""); // State for selected order
 
   useEffect(() => {
     const fetchDirectors = async () => {
+      let apiUrl = "http://127.0.0.1:8000/movies/directors/";
+      let queryParts = [];
+      if (searchTerm) {
+        queryParts.push(`search=${encodeURIComponent(searchTerm)}`);
+      }
+      if (order) {
+        queryParts.push(`ordering=${encodeURIComponent(order)}`);
+      }
+      if (queryParts.length) {
+        apiUrl += `?${queryParts.join("&")}`;
+      }
+
       try {
-        const response = await fetch('http://127.0.0.1:8000/movies/directors/');
+        const response = await fetch(apiUrl);
         const data = await response.json();
         setDirectors(data);
       } catch (error) {
@@ -19,23 +33,28 @@ function DirectorsList() {
     };
 
     fetchDirectors();
-  }, []);
+  }, [searchTerm, order]); // Depend on searchTerm and order
 
   const handleDirectorClick = (director) => {
     setSelectedDirector(director); // Update the selected director state
   };
 
+  const handleOrderChange = (selectedOrder) => {
+    setOrder(selectedOrder); // Update the order state
+  };
+
   return (
     <div className="movie-list">
+      <DirectorsOrder onOrderChange={handleOrderChange} /> {/* Add the DirectorsOrder component */}
       <h2>Directors</h2>
       {selectedDirector ? (
-        <DirectorDetails director={selectedDirector} /> // Display details of the selected director
+        <DirectorDetails director={selectedDirector} />
       ) : (
         directors.map(director => (
-          <DirectorItem 
-            key={director.id} 
-            director={director} 
-            onClick={() => handleDirectorClick(director)} 
+          <DirectorItem
+            key={director.id}
+            director={director}
+            onClick={() => handleDirectorClick(director)}
           />
         ))
       )}

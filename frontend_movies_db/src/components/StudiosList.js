@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import "./MovieList.css";
+import StudioItem from './StudioItem';
+import StudioDetails from './StudioDetails';
+import StudiosOrder from './StudiosOrder';
+import "./MovieList.css"; 
 
-
-function StudiosList() {
+function StudiosList({ searchTerm }) {
   const [studios, setStudios] = useState([]);
+  const [selectedStudio, setSelectedStudio] = useState(null);
+  const [order, setOrder] = useState(""); // State for selected order
 
   useEffect(() => {
     const fetchStudios = async () => {
+      let apiUrl = "http://127.0.0.1:8000/movies/studios/";
+      let queryParts = [];
+      if (searchTerm) {
+        queryParts.push(`search=${encodeURIComponent(searchTerm)}`);
+      }
+      if (order) {
+        queryParts.push(`ordering=${encodeURIComponent(order)}`);
+      }
+      if (queryParts.length) {
+        apiUrl += `?${queryParts.join("&")}`;
+      }
+
       try {
-        const response = await fetch('http://127.0.0.1:8000/movies/studios/');
+        const response = await fetch(apiUrl);
         const data = await response.json();
         setStudios(data);
       } catch (error) {
@@ -17,19 +33,31 @@ function StudiosList() {
     };
 
     fetchStudios();
-  }, []);
+  }, [searchTerm, order]);
+
+  const handleStudioClick = (studio) => {
+    setSelectedStudio(studio);
+  };
+
+  const handleOrderChange = (selectedOrder) => {
+    setOrder(selectedOrder);
+  };
 
   return (
     <div className="movie-list">
+      <StudiosOrder onOrderChange={handleOrderChange} />
       <h2>Studios</h2>
-      <ul>
-        {studios.map(studio => (
-          <li key={studio.id}>
-            {studio.name} - Founded: {studio.founded}
-            {/* Add more studio details here if needed */}
-          </li>
-        ))}
-      </ul>
+      {selectedStudio ? (
+        <StudioDetails studio={selectedStudio} />
+      ) : (
+        studios.map(studio => (
+          <StudioItem
+            key={studio.id}
+            studio={studio}
+            onClick={() => handleStudioClick(studio)}
+          />
+        ))
+      )}
     </div>
   );
 }
