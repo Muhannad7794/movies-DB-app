@@ -63,3 +63,5 @@ venv.bak/
 azure_conn.py
 local_conn.py
 certificates/
+source_data/
+```
