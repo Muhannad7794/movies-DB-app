@@ -1,0 +1,23 @@
+/* MovieDetails.css */
+.movie-details {
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    width: 80%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .movie-details h2 {
+    color: #333;
+    margin-top: 0;
+  }
+  
+  .movie-details p {
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  /* Add more styling as needed */
+  
