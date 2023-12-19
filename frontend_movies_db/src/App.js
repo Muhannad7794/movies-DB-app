@@ -1,6 +1,5 @@
 import React from 'react';
-import Navbar from './components/Navbar'; // Importing Navbar
-// import SearchBar from './components/SearchBar';
+import Navbar from './components/Navbar';
 import MovieList from './components/MovieList';
 
 function App() {
@@ -8,7 +7,6 @@ function App() {
     <div>
       <Navbar /> {/* Using Navbar */}
       {/* Other components will go here */}
-      {/* <SearchBar /> */}
       <MovieList />
     </div>
   );

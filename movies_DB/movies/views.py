@@ -17,7 +17,7 @@ class MovieInfoViewSet(viewsets.ModelViewSet):
     search_fields = [
         "title",
         "release_year",
-        "genre__genre_name",
+        "genre",
         "director__director_name",
         "credits_score",
     ]

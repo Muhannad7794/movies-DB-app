@@ -12,7 +12,7 @@ function MovieOrder({ onOrderChange }) {
         <option value="">Default</option>
         <option value="title">Title</option>
         <option value="release_year">Release Year</option>
-        <option value="credits_score">IMDB Score</option>
+        <option value="credits_score">Credits Score</option>
         {/* Add other ordering options based on your backend */}
       </select>
     </div>

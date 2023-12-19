@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import MovieItem from "./MovieItem";
 import MovieDetails from "./MovieDetails";
 import SearchBar from "./SearchBar";
-import Filter from "./Filter";
 import Orders from "./Order"; // Import the Orders component
 import "./MovieList.css";
 
 function MovieList() {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");  // State to hold the search term
-  const [filter, setFilter] = useState(""); // State for selected filter
+  const [searchTerm, setSearchTerm] = useState(""); // State to hold the search term
+  const [filter] = useState(""); // State for selected filter
   const [order, setOrder] = useState(""); // State for selected order
 
   useEffect(() => {
@@ -27,7 +26,7 @@ function MovieList() {
         queryParts.push(`ordering=${encodeURIComponent(order)}`);
       }
       if (queryParts.length) {
-        apiUrl += `?${queryParts.join('&')}`;
+        apiUrl += `?${queryParts.join("&")}`;
       }
 
       try {
@@ -47,10 +46,6 @@ function MovieList() {
     setSearchTerm(term);
   };
 
-  const handleFilterChange = (selectedFilter) => {
-    setFilter(selectedFilter);
-  };
-
   const handleOrderChange = (selectedOrder) => {
     setOrder(selectedOrder); // Update the order state
   };
@@ -62,14 +57,18 @@ function MovieList() {
   return (
     <div>
       <SearchBar onSearch={handleSearch} />
-      <Filter onFilterChange={handleFilterChange} />
-      <Orders onOrderChange={handleOrderChange} /> {/* Add the order component */}
+      <Orders onOrderChange={handleOrderChange} />{" "}
+      {/* Add the order component */}
       <div className="movie-list">
         {selectedMovie ? (
           <MovieDetails movie={selectedMovie} />
         ) : (
           movies.map((movie) => (
-            <MovieItem key={movie.id} movie={movie} onClick={handleMovieClick} />
+            <MovieItem
+              key={movie.id}
+              movie={movie}
+              onClick={handleMovieClick}
+            />
           ))
         )}
       </div>
