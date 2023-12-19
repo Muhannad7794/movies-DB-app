@@ -20,6 +20,7 @@ class MovieInfoViewSet(viewsets.ModelViewSet):
         "genre",
         "director__director_name",
         "credits_score",
+        "studio__name",
     ]
     ordering_fields = ["title", "release_year", "credits_score"]
 

@@ -1,11 +1,16 @@
 import React from 'react';
-import './Navbar.css'; // Importing CSS file
+import { Link } from 'react-router-dom';
+import './Navbar.css'; 
 
 function Navbar() {
   return (
     <nav>
       <h1>The Movies Database</h1>
-      {/* Navigation links can go here if needed */}
+      <div className="nav-links">
+        <Link to="/">Movies</Link>
+        <Link to="/directors">Directors</Link>
+        <Link to="/studios">Studios</Link>
+      </div>
     </nav>
   );
 }

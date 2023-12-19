@@ -1,6 +1,27 @@
 nav {
-    background-color: #333;
-    color: white;
-    padding: 1em;
-  }
-  
+  background-color: #03335a;
+  color: rgb(238, 226, 226);
+  padding: 1em;
+  text-align: center; /* Centralize content */
+}
+
+nav h1 {
+  margin: 0;
+  padding-bottom: 0.5em; /* Space between the header and the links */
+}
+
+.nav-links {
+  display: inline-block; /* Align links in a line */
+  padding: 0.5em;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5em 1em; /* Space around each link */
+  margin: 0 0.5em; /* Space between links */
+}
+
+.nav-links a:hover {
+  background-color: #555; /* Slight change on hover for better UX */
+}
