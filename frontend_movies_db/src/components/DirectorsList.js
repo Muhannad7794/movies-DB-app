@@ -4,10 +4,10 @@ import DirectorDetails from './DirectorDetails';
 import DirectorsOrder from './DirectorsOrder';
 import "./MovieList.css";
 
-function DirectorsList({ searchTerm }) { // Receive searchTerm as a prop
+function DirectorsList({ searchTerm }) {
   const [directors, setDirectors] = useState([]);
   const [selectedDirector, setSelectedDirector] = useState(null);
-  const [order, setOrder] = useState(""); // State for selected order
+  const [order, setOrder] = useState(""); 
 
   useEffect(() => {
     const fetchDirectors = async () => {
@@ -33,22 +33,22 @@ function DirectorsList({ searchTerm }) { // Receive searchTerm as a prop
     };
 
     fetchDirectors();
-  }, [searchTerm, order]); // Depend on searchTerm and order
+  }, [searchTerm, order]);
 
   const handleDirectorClick = (director) => {
-    setSelectedDirector(director); // Update the selected director state
+    setSelectedDirector(director);
   };
 
   const handleOrderChange = (selectedOrder) => {
-    setOrder(selectedOrder); // Update the order state
+    setOrder(selectedOrder);
   };
 
   return (
     <div className="movie-list">
-      <DirectorsOrder onOrderChange={handleOrderChange} /> {/* Add the DirectorsOrder component */}
+      <DirectorsOrder onOrderChange={handleOrderChange} />
       <h2>Directors</h2>
       {selectedDirector ? (
-        <DirectorDetails director={selectedDirector} />
+        <DirectorDetails directorProp={selectedDirector} />
       ) : (
         directors.map(director => (
           <DirectorItem
