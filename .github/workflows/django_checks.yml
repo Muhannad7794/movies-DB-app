@@ -37,5 +37,7 @@ jobs:
 
       - name: Generate Swagger Schema with DRF-Spectacular
         run: |
-          python /movies_DB/manage.py spectacular --file schema.yml
+          python manage.py spectacular --file schema.yml
+        working-directory: ./movies_DB
+
           
