@@ -35,4 +35,4 @@ jobs:
       - name: Test Database Connectivity
         run: |
           python movies_DB/manage.py check --database default
-        working-directory: ./movies_DB
+        
