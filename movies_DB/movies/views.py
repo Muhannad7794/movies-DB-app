@@ -6,7 +6,6 @@ from .serializers import (
     MovieInfoSerializer,
     DirectorsSerializer,
     StudiosSerializer,
-    
 )
 
 
@@ -21,7 +20,7 @@ class MovieInfoViewSet(viewsets.ModelViewSet):
         "director__director_name",
         "credits_score",
         "studio__name",
-        "studio__location"
+        "studio__location",
     ]
     ordering_fields = ["title", "release_year", "credits_score"]
 

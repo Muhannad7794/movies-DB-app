@@ -10,10 +10,10 @@ class TestMovieInfoViewSet:
         self.client = APIClient()
 
         director = Directors.objects.create(
-            director_name="Christopher Nolan", 
-            nationality="British", 
-            awards="Oscar", 
-            director_date_of_birth="1970-07-30"
+            director_name="Christopher Nolan",
+            nationality="British",
+            awards="Oscar",
+            director_date_of_birth="1970-07-30",
         )
         studio = Studios.objects.create(
             name="Warner Bros.",
@@ -87,4 +87,4 @@ class TestMovieInfoViewSet:
     def test_invalid_search_query(self):
         response = self.client.get("/movies/movies/", {"search": "123"})
         assert response.status_code == 200
-        assert len(response.data) == 0 
+        assert len(response.data) == 0

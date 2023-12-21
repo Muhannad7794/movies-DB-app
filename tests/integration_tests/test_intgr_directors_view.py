@@ -2,6 +2,7 @@ import pytest
 from rest_framework.test import APIClient
 from movies.models import Directors
 
+
 @pytest.mark.django_db
 def test_directors_list():
     client = APIClient()

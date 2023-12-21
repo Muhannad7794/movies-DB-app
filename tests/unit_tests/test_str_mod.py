@@ -7,10 +7,10 @@ def test_movieinfo_str():
     director = Directors.objects.create(
         director_name="Christopher Nolan",
         director_date_of_birth="1970-07-30",
-        )
-    
+    )
+
     studio = Studios.objects.create(name="Warner Bros.", founded=1923)
-    
+
     movie = MovieInfo.objects.create(
         title="Inception",
         genre="Science Fiction",
@@ -38,8 +38,7 @@ def test_directors_str():
 @pytest.mark.django_db
 def test_studios_str():
     studio = Studios.objects.create(
-        name="Warner Bros.", founded=1923, 
-        location="Burbank, California, United States"
+        name="Warner Bros.", founded=1923, location="Burbank, California, United States"
     )
 
     assert str(studio) == "Warner Bros."

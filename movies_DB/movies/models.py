@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class MovieInfo(models.Model):
     title = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
@@ -21,6 +22,7 @@ class Directors(models.Model):
 
     def __str__(self):
         return self.director_name
+
 
 class Studios(models.Model):
     name = models.CharField(max_length=100)

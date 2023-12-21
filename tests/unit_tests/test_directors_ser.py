@@ -2,6 +2,7 @@ import pytest
 from movies.models import Directors
 from movies.serializers import DirectorsSerializer
 
+
 @pytest.mark.django_db
 def test_directors_serializer():
     director_data = {
@@ -9,7 +10,7 @@ def test_directors_serializer():
         "nationality": "British-American",
         "director_date_of_birth": "1970-07-30",
         "director_best_movies": "Inception, Interstellar, The Dark Knight",
-        "awards": "Academy Award"
+        "awards": "Academy Award",
     }
     director = Directors.objects.create(**director_data)
     serializer = DirectorsSerializer(director)
