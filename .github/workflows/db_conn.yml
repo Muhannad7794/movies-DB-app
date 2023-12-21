@@ -25,13 +25,14 @@ jobs:
 
       - name: Set Database Environment Variables
         run: |
-          echo "USER=${ secrets.DB_USER }" >> $GITHUB_ENV
-          echo "PASSWORD=${ secrets.DB_PASSWORD }" >> $GITHUB_ENV
-          echo "HOST=${ secrets.DB_HOST }" >> $GITHUB_ENV
-          echo "PORT=${ secrets.DB_PORT }" >> $GITHUB_ENV
-          echo "NAME="movies_db"
-          echo "DATABASE_SSL_CA=${ env.MYSQL_SSL_CA }" >> $GITHUB_ENV
+          echo "USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+          echo "NAME=movies_db" >> $GITHUB_ENV
+          echo "DATABASE_SSL_CA=${{ env.MYSQL_SSL_CA }}" >> $GITHUB_ENV
 
       - name: Test Database Connectivity
         run: |
           python movies_DB/manage.py check --database default
+        working-directory: ./movies_DB
