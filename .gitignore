@@ -64,4 +64,5 @@ azure_conn.py
 local_conn.py
 certificates/
 source_files/
+dir_structure.txt
 ```
