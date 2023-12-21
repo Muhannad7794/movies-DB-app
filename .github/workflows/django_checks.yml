@@ -35,9 +35,9 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-      - name: Generate Swagger Schema with DRF-Spectacular
+      - name: Run Django Server
         run: |
-          python manage.py spectacular --file schema.yml
+          python manage.py runserver
         working-directory: ./movies_DB
 
           
