@@ -25,8 +25,8 @@ jobs:
 
       - name: Decode SSL Certificate
         run: |
-          echo "${{ secrets.ca }}" | base64 -d > ca.pem
-          echo "ca=./ca.pem" >> $GITHUB_ENV
+          echo "${{ secrets.ca }}" | base64 -d > certificates/DigiCertGlobalRootCA.crt.pem
+          echo "ca=./certificates/DigiCertGlobalRootCA.crt.pem" >> $GITHUB_ENV
 
       - name: Set Database Environment Variables
         run: |
