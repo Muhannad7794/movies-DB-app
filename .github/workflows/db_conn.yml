@@ -25,6 +25,8 @@ jobs:
 
       - name: Decode SSL Certificate
         run: |
+          mkdir -p certificates
+          ls -la  # Debug: List the current directory's contents
           echo "${{ secrets.ca }}" | base64 -d > C:/Muhannad_data/Studying/Projects/movies-DB-app/certificates/DigiCertGlobalRootCA.crt.pem
           echo "C:/Muhannad_data/Studying/Projects/movies-DB-app/certificates/DigiCertGlobalRootCA.crt.pem" >> $GITHUB_ENV
 
