@@ -15,7 +15,7 @@ function SearchBar({ onSearch }) { // Add the onSearch prop
                 <input
                     className="search-bar"
                     type="text"
-                    placeholder="Search movies..."
+                    placeholder="Search"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />

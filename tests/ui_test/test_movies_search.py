@@ -4,12 +4,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pytest
 
+
 @pytest.fixture(scope="module")
 def driver():
     driver = webdriver.Chrome()
     driver.implicitly_wait(10)
     yield driver
     driver.quit()
+
 
 def test_movies_search(driver):
     driver.get("http://localhost:3307/")  # Navigate to the Movies page
@@ -25,8 +27,8 @@ def test_movies_search(driver):
 
     # Wait for search results to load
     movie_card = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "movie-item")))
+        EC.presence_of_element_located((By.CLASS_NAME, "movie-item"))
+    )
 
     # Assert that the search results are displayed
-    assert 'Inception' in movie_card.text
-
+    assert "Inception" in movie_card.text
