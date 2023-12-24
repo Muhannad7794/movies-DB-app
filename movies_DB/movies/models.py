@@ -31,3 +31,11 @@ class Studios(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Posters(models.Model):
+    movie = models.ForeignKey("MovieInfo", on_delete=models.CASCADE)
+    poster = models.ImageField(upload_to="posters/")
+
+    def __str__(self):
+        return str(self.movie.title)

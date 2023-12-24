@@ -1,23 +1,22 @@
-/* MovieDetails.css */
 .movie-details {
-    background-color: #f2f2f2;
-    padding: 20px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    width: 80%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .movie-details h2 {
-    color: #333;
-    margin-top: 0;
-  }
-  
-  .movie-details p {
-    color: #555;
-    margin: 5px 0;
-  }
-  
-  /* Add more styling as needed */
-  
+  background-color: #161b22; /* Darker background for detail view */
+  padding: 50px;
+  margin: 0px;
+  border-radius: 8px;
+  border: 1px solid #30363d; /* Subtle border color */
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Subtle shadow for depth */
+  color: #c9d1d9; /* Light grey text for readability */
+  width: 1000; /* Adjust width to content */
+  max-width: auto; /* Maximum width for large screens */
+  align-self: center; /* Center in the available space */
+}
+
+.movie-details h2 {
+  color: #58a6ff; /* Bright accent color for titles */
+  margin-top: 35px;
+}
+
+.movie-details p {
+  color: #c9d1d9; /* Light text color for paragraphs */
+  margin-top: 10px ;
+}

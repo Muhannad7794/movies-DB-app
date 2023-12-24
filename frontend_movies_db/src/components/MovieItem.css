@@ -1,20 +1,42 @@
 .movie-item {
-  background-color: #f0f0f0; /* This might change if you use posters as backgrounds */
-  border: 1px solid #ddd;
+  background-color: #161b22; /* Darker card background */
+  border: none; /* Remove border for a cleaner look */
   padding: 15px;
+  padding-top: 35px;
   border-radius: 8px;
-  background-size: cover; /* Ensures the background image covers the entire item */
+  background-size: cover; /* Cover the entire card with the poster */
   background-position: center; /* Center the background image */
-  height: 300px; /* Adjust based on your preference */
+  height: 300px; /* Fixed height for uniformity */
+  width: 100%; /* This will take the full width of the grid column */
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Aligns text to the bottom */
+  justify-content: flex-end; /* Content at the bottom */
+  transition: transform 0.3s ease; /* Smooth transition for hover effects */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Consistent shadow for depth */
+}
+
+.movie-item:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Enhanced glow effect */
 }
 
 .movie-item h3 {
   margin: 0;
-  color: white; /* Change color for better visibility on the posters */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+  width: 90%; /* Limit the width of the title to 90% of the card */
+  color: #c9d1d9; /* Light text color for readability */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Semi-transparent background for readability */
   padding: 5px;
   border-radius: 5px;
+  overflow: hidden; /* Prevents content from spilling outside */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit the text to three lines */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis; /* Adds an ellipsis to overflowing text */
+  text-align: center;
+  white-space: normal; /* Keeps the text on a single line */
 }

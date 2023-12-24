@@ -1,17 +1,24 @@
 .order-container {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin: 0; /* Adjust margin to remove white space */
+  padding-top: 10px; /* Adjust padding to remove white space */
+  background-color: #0d1117; /* Dark theme background color */
+  width: 100%; /* Ensure it spans the full width of its container */
+  margin-bottom: 00px;
 }
 
 .order-container select {
-  padding: 8px 15px;
+  padding: 4px 15px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #30363d; /* Subtle border color */
   font-size: 16px;
+  background-color: #161b22; /* Dark background */
+  color: #c9d1d9; /* Light text color */
 }
 
 .order-container label {
   margin-right: 10px;
   font-size: 16px;
+  color: #0e3760; /* Light text color */
 }

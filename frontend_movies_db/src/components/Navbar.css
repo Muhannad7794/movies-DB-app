@@ -1,27 +1,35 @@
 nav {
-  background-color: #03335a;
-  color: rgb(238, 226, 226);
-  padding: 1em;
-  text-align: center; /* Centralize content */
+  background-color: #161b22; /* Slightly lighter than the app background for contrast */
+  color: #c9d1d9; /* Light grey text color for readability */
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px 0 rgba(255,255,255,0.1); /* Subtle shadow for depth */
+  margin-top: 0px; /* Space between the navbar and the content below it */
 }
 
 nav h1 {
-  margin: 0;
-  padding-bottom: 0.5em; /* Space between the header and the links */
+  font-size: 1.5em; /* Adjust the size as necessary */
+  font-weight: normal; /* Less bold */
+  color: #58a6ff; /* Bright accent color for the app name */
+  margin-bottom: 0.5em; /* Space between the title and the links */
 }
 
 .nav-links {
-  display: inline-block; /* Align links in a line */
-  padding: 0.5em;
+  display: flex; /* Use flexbox for better alignment */
+  justify-content: center; /* Center the links */
+  align-items: center;
+  gap: 1em; /* Use gap to space out links */
 }
 
 .nav-links a {
-  color: white;
+  color: #c9d1d9; /* Light grey text for links */
   text-decoration: none;
-  padding: 0.5em 1em; /* Space around each link */
-  margin: 0 0.5em; /* Space between links */
+  padding: 0.5em 1em;
+  border-radius: 4px; /* Rounded corners for modern look */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover */
 }
 
 .nav-links a:hover {
-  background-color: #555; /* Slight change on hover for better UX */
+  background-color: #30363d; /* Darker background on hover */
+  color: #58a6ff; /* Bright blue text on hover */
 }

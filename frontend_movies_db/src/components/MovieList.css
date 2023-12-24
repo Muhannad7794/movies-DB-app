@@ -1,7 +1,11 @@
 .movie-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust '200px' to your preferred minimum width */
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Keep the responsive grid */
+  grid-auto-rows: minmax(100px, auto); /* This ensures that all rows are the same height */
+  gap: 35px;
   padding: 20px;
-  justify-items: stretch; /* This ensures that each item stretches to fill the column width */
+
+  justify-items: center; /* Center items horizontally */
+  align-items: start; /* Align items to the start vertically */
+  background-color: #0d1117; /* Match the dark theme background */
 }
