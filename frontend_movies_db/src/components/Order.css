@@ -1,0 +1,17 @@
+.order-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.order-container select {
+  padding: 8px 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.order-container label {
+  margin-right: 10px;
+  font-size: 16px;
+}

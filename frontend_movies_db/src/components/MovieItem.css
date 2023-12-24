@@ -1,14 +1,20 @@
 .movie-item {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin: 10px 0;
-    width: 80%;
-    border-radius: 8px;
-  }
-  
-  .movie-item h3 {
-    margin: 0;
-    color: #333;
-  }
-  
+  background-color: #f0f0f0; /* This might change if you use posters as backgrounds */
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  background-size: cover; /* Ensures the background image covers the entire item */
+  background-position: center; /* Center the background image */
+  height: 300px; /* Adjust based on your preference */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Aligns text to the bottom */
+}
+
+.movie-item h3 {
+  margin: 0;
+  color: white; /* Change color for better visibility on the posters */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+  padding: 5px;
+  border-radius: 5px;
+}

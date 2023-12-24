@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import DirectorItem from './DirectorItem';
-import DirectorDetails from './DirectorDetails';
-import DirectorsOrder from './DirectorsOrder';
+import React, { useState, useEffect } from "react";
+import DirectorItem from "./DirectorItem";
+import DirectorDetails from "./DirectorDetails";
+import DirectorsOrder from "./DirectorsOrder";
 import "./MovieList.css";
 
 function DirectorsList({ searchTerm }) {
   const [directors, setDirectors] = useState([]);
   const [selectedDirector, setSelectedDirector] = useState(null);
-  const [order, setOrder] = useState(""); 
+  const [order, setOrder] = useState("");
 
   useEffect(() => {
     const fetchDirectors = async () => {
@@ -28,7 +28,7 @@ function DirectorsList({ searchTerm }) {
         const data = await response.json();
         setDirectors(data);
       } catch (error) {
-        console.error('Error fetching directors:', error);
+        console.error("Error fetching directors:", error);
       }
     };
 
@@ -44,20 +44,21 @@ function DirectorsList({ searchTerm }) {
   };
 
   return (
-    <div className="movie-list">
+    <div>
       <DirectorsOrder onOrderChange={handleOrderChange} />
-      <h2>Directors</h2>
-      {selectedDirector ? (
-        <DirectorDetails directorProp={selectedDirector} />
-      ) : (
-        directors.map(director => (
-          <DirectorItem
-            key={director.id}
-            director={director}
-            onClick={() => handleDirectorClick(director)}
-          />
-        ))
-      )}
+      <div className="movie-list">
+        {selectedDirector ? (
+          <DirectorDetails directorProp={selectedDirector} />
+        ) : (
+          directors.map((director) => (
+            <DirectorItem
+              key={director.id}
+              director={director}
+              onClick={() => handleDirectorClick(director)}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 }

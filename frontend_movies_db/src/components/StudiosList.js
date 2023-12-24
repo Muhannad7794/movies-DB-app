@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import StudioItem from './StudioItem';
-import StudioDetails from './StudioDetails';
-import StudiosOrder from './StudiosOrder';
+import React, { useState, useEffect } from "react";
+import StudioItem from "./StudioItem";
+import StudioDetails from "./StudioDetails";
+import StudiosOrder from "./StudiosOrder";
 import "./MovieList.css";
 
 function StudiosList({ searchTerm }) {
@@ -28,7 +28,7 @@ function StudiosList({ searchTerm }) {
         const data = await response.json();
         setStudios(data);
       } catch (error) {
-        console.error('Error fetching studios:', error);
+        console.error("Error fetching studios:", error);
       }
     };
 
@@ -44,20 +44,21 @@ function StudiosList({ searchTerm }) {
   };
 
   return (
-    <div className="movie-list">
+    <div>
       <StudiosOrder onOrderChange={handleOrderChange} />
-      <h2>Studios</h2>
-      {selectedStudio ? (
-        <StudioDetails studioProp={selectedStudio} />
-      ) : (
-        studios.map(studio => (
-          <StudioItem
-            key={studio.id}
-            studio={studio}
-            onClick={() => handleStudioClick(studio)}
-          />
-        ))
-      )}
+      <div className="movie-list">
+        {selectedStudio ? (
+          <StudioDetails studioProp={selectedStudio} />
+        ) : (
+          studios.map((studio) => (
+            <StudioItem
+              key={studio.id}
+              studio={studio}
+              onClick={() => handleStudioClick(studio)}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 }
