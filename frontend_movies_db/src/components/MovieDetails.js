@@ -28,11 +28,11 @@ function MovieDetails({ movie }) {
         <h2>{movie.title}</h2>
         <p>Genre: {movie.genre}</p>
         <p>Release Year: {movie.release_year}</p>
-        <p onClick={handleDirectorClick} className="interactive-text">
+        <p onClick={handleDirectorClick} className="interactive-text" id="director_click">
           Director: {movie.director.director_name}
         </p>
         <p>IMDB Score: {movie.credits_score}</p>
-        <p onClick={handleStudioClick} className="interactive-text">
+        <p onClick={handleStudioClick} className="interactive-text" id="studio_click">
           Production Studio: {movie.studio.name}
         </p>
       </div>

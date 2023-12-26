@@ -34,7 +34,7 @@ def test_director_from_movie_search(driver):
     movie_card.click()
     # wait fir clcik to load
     movie_details = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "movie-details"))
+        EC.presence_of_element_located((By.CLASS_NAME, "movie-details-text"))
     )
 
     # Assert that the studio name is displayed
