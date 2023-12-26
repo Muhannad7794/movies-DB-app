@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import './MovieDetails.css';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./MovieDetails.css";
+import "./MovieList.css";
 
 function DirectorDetails({ directorProp }) {
   const { directorId } = useParams();
@@ -9,9 +10,9 @@ function DirectorDetails({ directorProp }) {
   useEffect(() => {
     if (!directorProp && directorId) {
       fetch(`http://127.0.0.1:8000/movies/directors/${directorId}`)
-        .then(response => response.json())
-        .then(data => setDirector(data))
-        .catch(error => console.error('Error:', error));
+        .then((response) => response.json())
+        .then((data) => setDirector(data))
+        .catch((error) => console.error("Error:", error));
     }
   }, [directorId, directorProp]);
 
@@ -20,12 +21,16 @@ function DirectorDetails({ directorProp }) {
   }
 
   return (
-    <div className="movie-details">
-      <h2>{director.director_name}</h2>
-      <p>Nationality: {director.nationality}</p>
-      <p>Date of Birth: {director.director_date_of_birth}</p>
-      <p>Best Movies: {director.director_best_movies}</p>
-      <p>Awards: {director.awards}</p>
+    <div className="movie-list">
+      <div className="movie-details-container">
+        <div className="movie-details-text">
+          <h2>{director.director_name}</h2>
+          <p>Nationality: {director.nationality}</p>
+          <p>Date of Birth: {director.director_date_of_birth}</p>
+          <p>Best Movies: {director.director_best_movies}</p>
+          <p>Awards: {director.awards}</p>
+        </div>
+      </div>
     </div>
   );
 }

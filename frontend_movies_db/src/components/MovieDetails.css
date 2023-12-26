@@ -5,6 +5,7 @@
   max-width: 1200px; /* Max width of the container */
   margin: 40px auto; /* Center the container on the page with margin on top and bottom */
   gap: 50px; /* Increase gap between text and image */
+  background-color: #0d1117;
   color: #ffffff; /* White text for better visibility */
 }
 
