@@ -4,6 +4,7 @@
   grid-auto-rows: minmax(100px, auto); /* This ensures that all rows are the same height */
   gap: 35px;
   padding: 20px;
+  padding-bottom: 100px; /* For spacing */
 
   justify-items: center; /* Center items horizontally */
   align-items: start; /* Align items to the start vertically */
