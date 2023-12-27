@@ -27,6 +27,6 @@ class TMDBService:
             data = response.json()
             data["results"] = data["results"][:number_of_recommendations]
             return data
-        
+
         else:
             return None
