@@ -8,6 +8,10 @@ from .serializers import (
     StudiosSerializer,
     PostersSerializer,
 )
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .services.recommend import TMDBService
+
 
 
 class MovieInfoViewSet(viewsets.ModelViewSet):
@@ -47,3 +51,21 @@ class PostersViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ["movie__title"]
     ordering_fields = ["movie__title"]
+
+
+@api_view(['GET'])
+def movie_recommendations(request, movie_id):
+    try:
+        movie = MovieInfo.objects.get(id=movie_id)
+    except MovieInfo.DoesNotExist:
+        return Response({'error': 'Movie not found'}, status=404)
+
+    tmdb_service = TMDBService()
+
+    # Search for the TMDB ID using the movie's title
+    tmdb_id = tmdb_service.search_movie(movie.title)
+    if tmdb_id:
+        recommendations = tmdb_service.get_similar_movies(tmdb_id)
+        return Response(recommendations)
+    else:
+        return Response({'error': 'Movie not found on TMDB'}, status=404)
