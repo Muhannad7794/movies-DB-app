@@ -25,13 +25,13 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          python movies_DB/manage.py test tests/unit_tests
+          pytest tests/unit_tests
           
 
       - name: Run Black Box Tests
         run: |
-          python movies_DB/manage.py test tests/black_box
+          pytest tests/black_box
 
       - name: Run Integration Tests
         run: |
-          python movies_DB/manage.py test tests/integration_tests
+          pytest tests/integration_tests
