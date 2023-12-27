@@ -15,9 +15,7 @@ class TMDBService:
         if response.status_code == 200:
             results = response.json().get("results")
             if results:
-                return results[0].get(
-                    "id"
-                )  # Assuming the first result is the correct movie
+                return results[0].get("id")
         return None
 
     def get_similar_movies(self, movie_id, number_of_recommendations=6):
@@ -28,5 +26,15 @@ class TMDBService:
             data["results"] = data["results"][:number_of_recommendations]
             return data
 
+        elif response.status_code == 404:
+            return {"error": "Movie not found."}
+
+        elif response.status_code == 500:
+            return {"error": "TMDB API is facing problems."}
+
+        # ... error handleing for rate limit exceeded:
+        elif response.status_code == 429:
+            return {"error": "Rate limit exceeded."}
+
         else:
-            return None
+            return {"error": "Unknown error."}
