@@ -20,10 +20,13 @@ class TMDBService:
                 )  # Assuming the first result is the correct movie
         return None
 
-    def get_similar_movies(self, movie_id):
+    def get_similar_movies(self, movie_id, number_of_recommendations=6):
         url = f"{self.base_url}/movie/{movie_id}/similar?api_key={self.api_key}"
         response = requests.get(url)
         if response.status_code == 200:
-            return response.json()
+            data = response.json()
+            data["results"] = data["results"][:number_of_recommendations]
+            return data
+        
         else:
             return None

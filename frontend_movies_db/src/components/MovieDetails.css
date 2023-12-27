@@ -1,3 +1,9 @@
+.movie-details-page {
+  max-width: 1200px;
+  margin: 40px auto;
+  background-color: #0d1117;
+  color: #ffffff; /* White text for better visibility */
+}
 .movie-details-container {
   display: flex;
   align-items: flex-start; /* Keep items aligned to the top */
@@ -58,3 +64,41 @@
   z-index: 3; /* Ensures text is above the overlay */
   padding: 20px; /* Padding around the text */
 }
+
+
+/* Styles for recommendations section */
+.recommendations-section {
+  /* set the recommendation section to be viewd under the movie setails */
+  margin-top: 50px;
+  
+}
+
+.recommendation-list {
+ /* list the recommendations as a grid of one row */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Keep the responsive grid */
+  grid-auto-rows: minmax(100px, auto); /* This ensures that all rows are the same height */
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.recommendation-item {
+  background-color: #161b22; /* Dark background for each item */
+  padding: 10px;
+  border-radius: 10px; /* Rounded corners for each item */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  width: 200px; /* Fixed width for each item */
+  /* add gap between each item */
+  margin: 10px;
+  }
+
+.recommendation-item h4 {
+  margin: 0;
+  color: #58a6ff; /* Bright blue for the movie title */
+  text-align: center; /* Center the movie title */
+}
+
+
