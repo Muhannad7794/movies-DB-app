@@ -38,6 +38,7 @@ def test_movie_info_serializer():
         "credits_score": 8.8,
         "director": DirectorsSerializer(director).data,
         "studio": StudiosSerializer(studio).data,
+        "poster_url": None,
     }
 
     assert serializer.data == expected_data
