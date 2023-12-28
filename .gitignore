@@ -49,6 +49,7 @@ migrations/
 static/
 *_initial.py
 __pycache__/
+MEDIA_ROOT/
 # Environments
 .env
 .venv
