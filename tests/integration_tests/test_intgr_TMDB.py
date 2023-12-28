@@ -18,6 +18,7 @@ def test_movie_recommendations_integration_with_real_api():
         name="Warner Bros", founded=1923, location="Burbank"
     )
     movie = MovieInfo.objects.create(
+        id=45,
         title="Inception",
         director=director,
         studio=studio,
