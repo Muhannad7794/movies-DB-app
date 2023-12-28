@@ -28,6 +28,11 @@ jobs:
         run: |
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
 
+      # add API key for the movie database
+      - name: Set Movie Database API Key
+        run: |
+          echo "MOVIE_DB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> $GITHUB_ENV
+
 
       # add a step to configure and decode the SSL certificate for the database
       - name: Decode SSL Certificate
