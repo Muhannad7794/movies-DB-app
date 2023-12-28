@@ -16,7 +16,7 @@ def test_get_similar_movies_unknown_error():
     responses.add(
         responses.GET,
         mock_url,
-        json={"status_message": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"}, 
+        json={"status_message": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"},
         status=418,  # unknown status code
     )
 

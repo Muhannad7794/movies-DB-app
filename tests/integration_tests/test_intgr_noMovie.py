@@ -2,6 +2,7 @@ import responses
 from movies.services.recommend import TMDBService
 from django.conf import settings
 
+
 @responses.activate
 def test_get_similar_movies_nonexistent_movie():
     # Create an instance of TMDBService
