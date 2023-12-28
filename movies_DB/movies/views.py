@@ -68,4 +68,4 @@ def movie_recommendations(request, movie_id):
         recommendations = tmdb_service.get_similar_movies(tmdb_id)
         return Response(recommendations)
     else:
-        return Response({"error": "Movie not found on TMDB"}, status=404)
+        return Response({"error": "Movie not found"}, status=404)
