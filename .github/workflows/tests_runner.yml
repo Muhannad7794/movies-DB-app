@@ -61,4 +61,4 @@ jobs:
 
       - name: Run Integration Tests
         run: |
-          pytest tests/integration_tests
+          pytest tests/integration_tests -v

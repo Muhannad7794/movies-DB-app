@@ -1,4 +1,6 @@
 import pytest
+import requests
+import json
 from django.urls import reverse
 from rest_framework.test import APIClient
 from movies.models import MovieInfo, Directors, Studios
@@ -31,7 +33,11 @@ def test_movie_recommendations_integration_with_real_api():
 
     # Fetch the recommendations using the real API
     path = reverse("movie-recommendations", kwargs={"movie_id": movie.id})
+    # print(path) for debugging
+    print("Generated path:", path)
+
     response = client.get(path)
+    print("Response:", response.json())
 
     # Check the status code
     assert response.status_code == 200
