@@ -23,6 +23,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # add a step to configure and decode the SSL certificate for the database
+      - name: Decode SSL Certificate
+        run: |
+          mkdir -p certificates
+          echo "${{ secrets.ca }}" | base64 -d > ./certificates/DigiCertGlobalRootCA.crt.pem
+          echo "ca=./certificates/DigiCertGlobalRootCA.crt.pem" >> $GITHUB_ENV
+
+      # add a step to configure the database connection string
+      - name: Set Database Environment Variables
+        run: |
+          echo "USER=${{ secrets.USER }}" >> $GITHUB_ENV
+          echo "PASSWORD=${{ secrets.PASSWORD }}" >> $GITHUB_ENV
+          echo "HOST=${{ secrets.HOST }}" >> $GITHUB_ENV
+          echo "PORT=${{ secrets.PORT }}" >> $GITHUB_ENV
+          echo "NAME=movies_db" >> $GITHUB_ENV
+
       - name: Run Unit Tests
         run: |
           pytest tests/unit_tests
