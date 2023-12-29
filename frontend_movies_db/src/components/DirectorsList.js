@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DirectorItem from "./DirectorItem";
 import DirectorDetails from "./DirectorDetails";
 import DirectorsOrder from "./DirectorsOrder";
-import "./MovieList.css";
+import "./DirectorsList.css";
 
 function DirectorsList({ searchTerm }) {
   const [directors, setDirectors] = useState([]);
@@ -46,7 +46,7 @@ function DirectorsList({ searchTerm }) {
   return (
     <div>
       <DirectorsOrder onOrderChange={handleOrderChange} />
-      <div className="movie-list">
+      <div className="directors-list">
         {selectedDirector ? (
           <DirectorDetails directorProp={selectedDirector} />
         ) : (

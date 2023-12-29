@@ -1,5 +1,5 @@
 import React from 'react';
-import './MovieItem.css';
+import './DirectorItem.css';
 
 function DirectorItem({ director, onClick }) {
   return (

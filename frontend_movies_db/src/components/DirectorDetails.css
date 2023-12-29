@@ -1,0 +1,68 @@
+.director-details-page {
+  max-width: 1200px;
+  margin: 40px auto;
+  background-color: #0d1117;
+  color: #ffffff; /* White text for better visibility */
+}
+.director-details-container {
+  display: flex;
+  align-items: flex-start; /* Keep items aligned to the top */
+  justify-content: center; /* Center items horizontally */
+  max-width: 1200px; /* Max width of the container */
+  margin: 40px auto; /* Center the container on the page with margin on top and bottom */
+  gap: 50px; /* Increase gap between text and image */
+  background-color: #0d1117;
+  color: #ffffff; /* White text for better visibility */
+}
+
+.director-details-text {
+  flex-basis: 60%; /* Allocate 60% of the space to text */
+  max-width: 60%; /* Ensure it doesn't grow beyond the allocated percentage */
+  padding-right: 20px; /* Right padding for spacing from the image */
+}
+
+.director-details-image {
+  max-width: 40%;
+  max-height: 40%;
+  border-radius: 15px; /* Rounded corners for the image */
+  overflow: hidden; /* Ensures the image doesn't overflow the border radius */
+}
+
+.director-details-image img {
+  width: 100%;
+  height: 100%; /* This will ensure the height matches the parent */
+  object-fit: cover; /* Ensures the image fills the container */
+  display: block; /* Removes any extra space beneath the image */
+}
+
+/* The rest of your styles remain unchanged */
+.interactive-text {
+  cursor: pointer;
+  color: #58a6ff; /* Bright blue for interactive elements */
+  text-decoration: underline; /* Underline to indicate clickability */
+}
+
+.interactive-text:hover {
+  color: #ffffff; /* White text on hover for better visibility */
+  text-decoration: none; /* No underline on hover */
+}
+
+/* Additional styles for better readability of text over the image */
+.director-details-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text readability */
+  border-radius: 15px; /* Rounded corners for the overlay */
+  z-index: 2; /* Ensures overlay is above the image */
+}
+
+.director-details-content {
+  position: relative;
+  z-index: 3; /* Ensures text is above the overlay */
+  padding: 20px; /* Padding around the text */
+}
+
+

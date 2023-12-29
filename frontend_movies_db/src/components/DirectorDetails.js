@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./MovieDetails.css";
-import "./MovieList.css";
+import "./DirectorDetails.css";
+import "./DirectorsList.css";
 
 function DirectorDetails({ directorProp }) {
   const { directorId } = useParams();
@@ -21,9 +21,9 @@ function DirectorDetails({ directorProp }) {
   }
 
   return (
-    <div className="movie-list">
-      <div className="movie-details-container">
-        <div className="movie-details-text">
+    <div className="directors-list">
+      <div className="director-details-container">
+        <div className="director-details-text">
           <h2>{director.director_name}</h2>
           <p>Nationality: {director.nationality}</p>
           <p>Date of Birth: {director.director_date_of_birth}</p>
