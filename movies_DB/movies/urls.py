@@ -5,6 +5,7 @@ from .views import (
     DirectorsViewSet,
     StudiosViewSet,
     PostersViewSet,
+    DirectorsImagesViewSet,
     movie_recommendations,
 )
 
@@ -13,6 +14,8 @@ router.register(r"movies", MovieInfoViewSet)
 router.register(r"directors", DirectorsViewSet)
 router.register(r"studios", StudiosViewSet)
 router.register(r"posters", PostersViewSet)
+router.register(r"directors-images", DirectorsImagesViewSet)
+
 
 urlpatterns = [
     path(

@@ -7,6 +7,7 @@ from .serializers import (
     DirectorsSerializer,
     StudiosSerializer,
     PostersSerializer,
+    DirectorsImagesSerializer,
 )
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -51,6 +52,14 @@ class PostersViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ["movie__title"]
     ordering_fields = ["movie__title"]
+
+
+class DirectorsImagesViewSet(viewsets.ModelViewSet):
+    queryset = Directors.objects.all()
+    serializer_class = DirectorsImagesSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ["director_name"]
+    ordering_fields = ["director_name"]
 
 
 @api_view(["GET"])

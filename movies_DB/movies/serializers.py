@@ -1,6 +1,6 @@
 # movies/serializers.py
 from rest_framework import serializers
-from .models import MovieInfo, Directors, Studios, Posters
+from .models import MovieInfo, Directors, Studios, Posters, DirectorsImages
 
 
 class DirectorsSerializer(serializers.ModelSerializer):
@@ -36,4 +36,12 @@ class PostersSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Posters
+        fields = "__all__"
+
+
+class DirectorsImagesSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = DirectorsImages
         fields = "__all__"

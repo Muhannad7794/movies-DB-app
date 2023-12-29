@@ -39,3 +39,11 @@ class Posters(models.Model):
 
     def __str__(self):
         return str(self.movie.title)
+
+
+class DirectorsImages(models.Model):
+    director = models.ForeignKey("Directors", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="directors_images/")
+
+    def __str__(self):
+        return str(self.director.director_name)
