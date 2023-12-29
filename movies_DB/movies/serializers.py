@@ -5,6 +5,7 @@ from .models import MovieInfo, Directors, Studios, Posters, DirectorsImages
 
 class DirectorsSerializer(serializers.ModelSerializer):
     picture_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Directors
         fields = "__all__"
@@ -14,6 +15,7 @@ class DirectorsSerializer(serializers.ModelSerializer):
         if picture and picture.picture:
             return self.context["request"].build_absolute_uri(picture.picture.url)
         return None
+
 
 class StudiosSerializer(serializers.ModelSerializer):
     class Meta:

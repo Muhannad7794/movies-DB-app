@@ -7,6 +7,15 @@ function DirectorDetails({ directorProp }) {
   const { directorId } = useParams();
   const [director, setDirector] = useState(directorProp);
 
+  const pictureStyle = {
+    backgroundImage: director && director.picture_url ? `url(${director.picture_url})` : 'none',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    borderRadius: "15px", // Rounded corners for the image
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)", // Shadow for depth
+    // Set height via aspect ratio here if needed
+  };
+
   useEffect(() => {
     if (!directorProp && directorId) {
       fetch(`http://127.0.0.1:8000/movies/directors/${directorId}`)
@@ -29,9 +38,16 @@ function DirectorDetails({ directorProp }) {
           <p>Date of Birth: {director.director_date_of_birth}</p>
           <p>Best Movies: {director.director_best_movies}</p>
           <p>Awards: {director.awards}</p>
+          
+        </div>
+        <div className="director-details-image" style={pictureStyle}>
+          {director.picture_url && (
+            <img src={director.picture_url} alt={director.director_name} />
+          )}
         </div>
       </div>
     </div>
+    
   );
 }
 
