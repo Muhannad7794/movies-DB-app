@@ -43,7 +43,7 @@ class Posters(models.Model):
 
 class DirectorsImages(models.Model):
     director = models.ForeignKey("Directors", on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="directors_images/")
+    picture = models.ImageField(upload_to="directors_images/")
 
     def __str__(self):
         return str(self.director.director_name)

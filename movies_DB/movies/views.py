@@ -1,7 +1,7 @@
 # movies/views.py
 from django.shortcuts import render
 from rest_framework import viewsets, filters
-from .models import MovieInfo, Directors, Studios, Posters
+from .models import MovieInfo, Directors, Studios, Posters, DirectorsImages
 from .serializers import (
     MovieInfoSerializer,
     DirectorsSerializer,
@@ -55,7 +55,7 @@ class PostersViewSet(viewsets.ModelViewSet):
 
 
 class DirectorsImagesViewSet(viewsets.ModelViewSet):
-    queryset = Directors.objects.all()
+    queryset = DirectorsImages.objects.all()
     serializer_class = DirectorsImagesSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ["director_name"]

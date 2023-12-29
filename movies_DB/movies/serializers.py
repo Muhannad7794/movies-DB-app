@@ -4,10 +4,16 @@ from .models import MovieInfo, Directors, Studios, Posters, DirectorsImages
 
 
 class DirectorsSerializer(serializers.ModelSerializer):
+    picture_url = serializers.SerializerMethodField()
     class Meta:
         model = Directors
         fields = "__all__"
 
+    def get_picture_url(self, obj):
+        picture = DirectorsImages.objects.filter(director=obj).first()
+        if picture and picture.picture:
+            return self.context["request"].build_absolute_uri(picture.picture.url)
+        return None
 
 class StudiosSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,7 +46,7 @@ class PostersSerializer(serializers.ModelSerializer):
 
 
 class DirectorsImagesSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=True)
+    picture = serializers.ImageField(use_url=True)
 
     class Meta:
         model = DirectorsImages
