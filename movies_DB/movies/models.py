@@ -47,3 +47,11 @@ class DirectorsImages(models.Model):
 
     def __str__(self):
         return str(self.director.director_name)
+
+
+class StudiosImages(models.Model):
+    studio = models.ForeignKey("Studios", on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to="studios_images/")
+
+    def __str__(self):
+        return str(self.studio.name)

@@ -1,13 +1,21 @@
 # movies/views.py
 from django.shortcuts import render
 from rest_framework import viewsets, filters
-from .models import MovieInfo, Directors, Studios, Posters, DirectorsImages
+from .models import (
+    MovieInfo,
+    Directors,
+    Studios,
+    Posters,
+    DirectorsImages,
+    StudiosImages,
+)
 from .serializers import (
     MovieInfoSerializer,
     DirectorsSerializer,
     StudiosSerializer,
     PostersSerializer,
     DirectorsImagesSerializer,
+    StudiosImagesSerializer,
 )
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -60,6 +68,14 @@ class DirectorsImagesViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ["director_name"]
     ordering_fields = ["director_name"]
+
+
+class StudiosImagesViewSet(viewsets.ModelViewSet):
+    queryset = StudiosImages.objects.all()
+    serializer_class = StudiosImagesSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ["name"]
+    ordering_fields = ["name"]
 
 
 @api_view(["GET"])

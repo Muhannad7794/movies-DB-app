@@ -1,6 +1,13 @@
 # movies/serializers.py
 from rest_framework import serializers
-from .models import MovieInfo, Directors, Studios, Posters, DirectorsImages
+from .models import (
+    MovieInfo,
+    Directors,
+    Studios,
+    Posters,
+    DirectorsImages,
+    StudiosImages,
+)
 
 
 class DirectorsSerializer(serializers.ModelSerializer):
@@ -18,9 +25,17 @@ class DirectorsSerializer(serializers.ModelSerializer):
 
 
 class StudiosSerializer(serializers.ModelSerializer):
+    picture_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Studios
         fields = "__all__"
+
+    def get_picture_url(self, obj):
+        picture = StudiosImages.objects.filter(studio=obj).first()
+        if picture and picture.picture:
+            return self.context["request"].build_absolute_uri(picture.picture.url)
+        return None
 
 
 class MovieInfoSerializer(serializers.ModelSerializer):
@@ -52,4 +67,12 @@ class DirectorsImagesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DirectorsImages
+        fields = "__all__"
+
+
+class StudiosImagesSerializer(serializers.ModelSerializer):
+    picture = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = StudiosImages
         fields = "__all__"

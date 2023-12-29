@@ -7,6 +7,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, "MEDIA_ROOT")
 DIRECTORS_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "directors")
+STUDIOS_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "studios")
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 
 
