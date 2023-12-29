@@ -17,4 +17,7 @@ def test_studios_serializer():
     expected_data = dict(studio_data)
     expected_data["id"] = studio.id
 
+    # update to include the picture_url in the expected data
+    expected_data["picture_url"] = None
+
     assert serializer.data == expected_data
