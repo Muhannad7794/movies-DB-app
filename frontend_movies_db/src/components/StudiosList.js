@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import StudioItem from "./StudioItem";
 import StudioDetails from "./StudioDetails";
 import StudiosOrder from "./StudiosOrder";
-import "./MovieList.css";
+import "./StudiosList.css";
 
 function StudiosList({ searchTerm }) {
   const [studios, setStudios] = useState([]);
@@ -46,7 +46,7 @@ function StudiosList({ searchTerm }) {
   return (
     <div>
       <StudiosOrder onOrderChange={handleOrderChange} />
-      <div className="movie-list">
+      <div className="studios-list">
         {selectedStudio ? (
           <StudioDetails studioProp={selectedStudio} />
         ) : (

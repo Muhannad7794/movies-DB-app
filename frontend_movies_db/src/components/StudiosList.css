@@ -1,4 +1,4 @@
-.directors-list {
+.studios-list {
   display: grid;
   grid-template-columns: repeat(
     auto-fit,

@@ -9,7 +9,11 @@ function DirectorItem({ director, onClick }) {
     backgroundPosition: "center",
   };
   return (
-    <div className="movie-item" style={style} onClick={() => onClick(director)}>
+    <div
+      className="director-item"
+      style={style}
+      onClick={() => onClick(director)}
+    >
       <h3>{director.director_name}</h3>
       {/* Include other director details you wish to display */}
     </div>

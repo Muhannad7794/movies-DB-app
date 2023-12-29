@@ -1,4 +1,4 @@
-.director-item {
+.studio-item {
   background-color: #161b22; /* Darker card background */
   border: none; /* Remove border for a cleaner look */
   padding: 15px;
@@ -15,12 +15,12 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Consistent shadow for depth */
 }
 
-.director-item:hover {
+.studio-item:hover {
   transform: translateY(-5px); /* Slight lift effect on hover */
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Enhanced glow effect */
 }
 
-.director-item h3 {
+.studio-item h3 {
   margin: 0;
   width: 90%; /* Limit the width of the title to 90% of the card */
   color: #c9d1d9; /* Light text color for readability */
