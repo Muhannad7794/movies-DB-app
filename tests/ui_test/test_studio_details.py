@@ -23,13 +23,13 @@ def test_studios_search(driver):
     search_button.click()
 
     WebDriverWait(driver, 20).until(
-        EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".movie-item"))
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".studio-item"))
     )
 
     retries = 3
     for _ in range(retries):
         try:
-            studio_cards = driver.find_elements(By.CSS_SELECTOR, ".movie-item h3")
+            studio_cards = driver.find_elements(By.CSS_SELECTOR, ".studio-item h3")
             studio_names = [card.text for card in studio_cards]
             print("Studio Names:", studio_names)
             assert any("warner" in name.lower() for name in studio_names)
@@ -41,7 +41,7 @@ def test_studios_search(driver):
     studio_cards[0].click()
 
     studio_details = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "movie-details"))
+        EC.presence_of_element_located((By.CLASS_NAME, "studio-details-text"))
     )
 
     # Assert the studio details are displayed

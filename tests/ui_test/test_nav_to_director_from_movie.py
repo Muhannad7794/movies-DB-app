@@ -48,7 +48,7 @@ def test_director_from_movie_search(driver):
 
     # Wait for the director page to load
     director_details = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "movie-details"))
+        EC.presence_of_element_located((By.CLASS_NAME, "director-details-text"))
     )
 
     # Assert the director details are displayed

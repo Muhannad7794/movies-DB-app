@@ -24,7 +24,7 @@ def test_directors_navigation(driver):
         By.CSS_SELECTOR, "nav .nav-links a[href='/directors']"
     )
     directors_link.click()
-    assert driver.find_element(By.CLASS_NAME, "movie-list")
+    assert driver.find_element(By.CLASS_NAME, "directors-list")
 
 
 def test_studios_navigation(driver):
@@ -33,4 +33,4 @@ def test_studios_navigation(driver):
         By.CSS_SELECTOR, "nav .nav-links a[href='/studios']"
     )
     studios_link.click()
-    assert driver.find_element(By.CLASS_NAME, "movie-list")
+    assert driver.find_element(By.CLASS_NAME, "studios-list")

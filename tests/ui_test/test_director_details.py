@@ -30,14 +30,14 @@ def test_directors_details_search(driver):
 
     # Wait for search results to load and stabilize
     WebDriverWait(driver, 20).until(
-        EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".movie-item"))
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".director-item"))
     )
 
     # Retry logic for fetching elements
     retries = 3
     for _ in range(retries):
         try:
-            director_cards = driver.find_elements(By.CSS_SELECTOR, ".movie-item h3")
+            director_cards = driver.find_elements(By.CSS_SELECTOR, ".director-item h3")
             director_names = [card.text for card in director_cards]
             print("Director Names:", director_names)
             assert any("martin scorsese" in name.lower() for name in director_names)
@@ -50,7 +50,7 @@ def test_directors_details_search(driver):
     director_cards[0].click()
     # Wait for the director details page to load
     director_details = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "movie-details"))
+        EC.presence_of_element_located((By.CLASS_NAME, "director-details-text"))
     )
     # assert the presence of the director details
     assert "Martin Scorsese" in director_details.text

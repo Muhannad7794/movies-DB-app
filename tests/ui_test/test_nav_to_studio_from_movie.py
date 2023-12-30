@@ -38,7 +38,7 @@ def test_director_from_movie_search(driver):
     )
 
     # Assert that the studio name is displayed
-    assert "Christopher Nolan" in movie_details.text
+    assert "Warner Bros" in movie_details.text
 
     # Click the studio name
     studio_link = WebDriverWait(driver, 10).until(
@@ -48,7 +48,7 @@ def test_director_from_movie_search(driver):
 
     # Wait for the studio page to load
     studio_details = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "movie-details"))
+        EC.presence_of_element_located((By.CLASS_NAME, "studio-details-text"))
     )
 
     # Assert the studio details are displayed
