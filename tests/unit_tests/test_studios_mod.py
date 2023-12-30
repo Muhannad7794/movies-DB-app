@@ -8,4 +8,6 @@ def test_studio_creation():
         name="Warner Bros.", founded=1923, location="Burbank, California, United States"
     )
     assert studio.name == "Warner Bros."
+    assert studio.founded == 1923
+    assert studio.location == "Burbank, California, United States"
     assert Studios.objects.count() == 1

@@ -24,4 +24,11 @@ def test_movie_info_creation():
         studio=studio,
     )
     assert movie.title == "Inception"
+    assert movie.genre == "Science Fiction"
+    assert movie.release_year == 2010
+    assert movie.director.director_name == "Christopher Nolan"
+    assert movie.credits_score == 8.8
+    assert movie.studio.name == "Warner Bros."
+    assert movie.director.awards == "Academy Award"
+    assert movie.studio.founded == 1923
     assert MovieInfo.objects.count() == 1
