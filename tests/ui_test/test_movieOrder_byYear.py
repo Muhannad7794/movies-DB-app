@@ -55,4 +55,3 @@ def test_movies_sort_by_release_year(driver):
             index += 1
         except NoSuchElementException:
             pytest.fail("Could not find expected element on the page.")
-

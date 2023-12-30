@@ -16,12 +16,12 @@ def driver():
     driver.quit()
 
 
-def test_movie_ordering(driver):
+def test_director_ordering_by_name(driver):
     # Navigate to the Movies window
-    driver.get("http://localhost:3307/")  # Replace with your application's URL
+    driver.get("http://localhost:3307/directors/")
 
-    # Function to select an order from the dropdown and return movie titles
-    def get_movie_titles(order_value):
+    # Function to select an order from the dropdown
+    def get_directors_names(order_value):
         try:
             order_select = driver.find_element(By.ID, "order")
             order_select.click()
@@ -29,19 +29,22 @@ def test_movie_ordering(driver):
                 By.CSS_SELECTOR, f"option[value='{order_value}']"
             ).click()
 
-            # Wait for the page to update with sorted movies
+            # Wait for the page to update with sorted directors
             WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CLASS_NAME, "movie-item"))
+                EC.presence_of_element_located((By.CLASS_NAME, "director-item"))
             )
 
-            # Fetch titles of the movies listed
-            movie_items = driver.find_elements(By.CLASS_NAME, "movie-item")
-            return [movie.find_element(By.TAG_NAME, "h3").text for movie in movie_items]
+            # Fetch titles of the directors listed
+            director_items = driver.find_elements(By.CLASS_NAME, "director-item")
+            return [
+                director.find_element(By.TAG_NAME, "h3").text
+                for director in director_items
+            ]
         except NoSuchElementException:
             pytest.fail(f"Failed to find element, check if the UI has changed")
 
-    # Verify ordering by Title
-    titles_sorted_by_title = get_movie_titles("title")
-    assert titles_sorted_by_title == sorted(
-        titles_sorted_by_title
-    ), "Movies are not sorted by title correctly"
+    # Verify ordering by name
+    names_sorted_by_name = get_directors_names("director_name")
+    assert names_sorted_by_name == sorted(
+        names_sorted_by_name
+    ), "directors are not sorted by name correctly"
