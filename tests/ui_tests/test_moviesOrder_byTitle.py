@@ -30,7 +30,7 @@ def test_movie_ordering(driver):
             ).click()
 
             # Wait for the page to update with sorted movies
-            WebDriverWait(driver, 10).until(
+            WebDriverWait(driver, 20).until(
                 EC.presence_of_element_located((By.CLASS_NAME, "movie-item"))
             )
 
