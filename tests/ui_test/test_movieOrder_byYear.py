@@ -15,7 +15,7 @@ def driver():
 
 
 def test_movies_sort_by_release_year(driver):
-    driver.get("http://localhost:3307/")  # Replace with your application's URL
+    driver.get("http://localhost:3307/")
 
     # Set order by 'release_year'
     order_select = driver.find_element(By.ID, "order")
@@ -41,9 +41,7 @@ def test_movies_sort_by_release_year(driver):
                 EC.presence_of_element_located((By.CLASS_NAME, "movie-details-text"))
             )
             details_text = movie_details.text
-            release_year = int(
-                details_text.split("Release Year: ")[1].split("\n")[0]
-            )  # Adjust parsing as per your UI
+            release_year = int(details_text.split("Release Year: ")[1].split("\n")[0])
 
             if previous_year is not None and release_year < previous_year:
                 pytest.fail(
