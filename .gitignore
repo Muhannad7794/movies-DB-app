@@ -68,4 +68,6 @@ source_files/
 dir_structure.txt
 performance_reports/
 media/
+MEDIA_ROOT/
+MEDIA_ROOT/posters/
 ```
