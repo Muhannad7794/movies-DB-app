@@ -64,5 +64,5 @@ jobs:
 
       - name: Run E2E Tests
         run: |
-          pytest tests/selenium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage
+          pytest tests/selenium
           
