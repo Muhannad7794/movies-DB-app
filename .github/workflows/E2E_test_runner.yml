@@ -95,5 +95,5 @@ jobs:
 
       - name: Run E2E Tests
         run: |
-          pytest tests/ui_haedless
+          pytest tests/ui_headless
           
