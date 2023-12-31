@@ -60,6 +60,11 @@ jobs:
       - name: Set up Chrome WebDriver
         uses: browser-actions/setup-chrome@v1
 
+      - name: Start Django Server
+        run: |
+          python manage.py runserver &  # Starts the server in the background
+          sleep 10  # Gives the server some time to start
+
       # run the tests
 
       - name: Run E2E Tests
