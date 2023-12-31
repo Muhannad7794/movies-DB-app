@@ -23,6 +23,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # install Node Js
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+
+      # install npm
+      - name: Install npm Dependencies
+        run: |
+          cd frontend_movies_db 
+          npm install
+
       # configure the secret key
       - name: Set Django Secret Key
         run: |
@@ -69,6 +82,12 @@ jobs:
         run: |
           python movies_DB/manage.py runserver &  # Starts the server in the background
           sleep 10  # Gives the server some time to start
+
+      - name: Start React Server
+        run: |
+          cd frontend_movies_db 
+          npm start &
+          sleep 10
 
       # run the tests
 
