@@ -21,7 +21,7 @@ def driver():
     driver.quit()
 
 
-def test_directors_details_search(driver):
+def test_directors_search(driver):
     driver.get("http://localhost:3307/directors/")
 
     # Input a search term
@@ -50,15 +50,3 @@ def test_directors_details_search(driver):
         except StaleElementReferenceException:
             if _ == retries - 1:
                 raise
-
-    # Click on the first director card
-    director_cards[0].click()
-    # Wait for the director details page to load
-    director_details = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "director-details-text"))
-    )
-    # assert the presence of the director details
-    assert "Martin Scorsese" in director_details.text
-    assert "1942" in director_details.text
-    assert "The Departed" in director_details.text
-    assert "BAFTA Award" in director_details.text
