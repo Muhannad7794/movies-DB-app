@@ -62,7 +62,7 @@ jobs:
 
       - name: Start Django Server
         run: |
-          python manage.py runserver &  # Starts the server in the background
+          python movies_DB/manage.py runserver &  # Starts the server in the background
           sleep 10  # Gives the server some time to start
 
       # run the tests
