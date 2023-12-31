@@ -27,6 +27,8 @@ pip-delete-this-directory.txt
 
 # Unit test / coverage reports
 htmlcov/
+coverage/
+coverage_report/
 .tox/
 .nox/
 .coverage
@@ -70,4 +72,5 @@ performance_reports/
 media/
 MEDIA_ROOT/
 posters/
+gh_actions_reports/
 ```
