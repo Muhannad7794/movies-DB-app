@@ -49,11 +49,20 @@ jobs:
           echo "HOST=${{ secrets.HOST }}" >> $GITHUB_ENV
           echo "PORT=${{ secrets.PORT }}" >> $GITHUB_ENV
           echo "NAME=movies_db" >> $GITHUB_ENV
+      
+      # install chrome driver
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
+      # set up chrome driver
       - name: Set up Chrome WebDriver
         uses: browser-actions/setup-chrome@v1
 
+      # run the tests
+
       - name: Run E2E Tests
         run: |
-          pytest tests/ui_tests -v
+          pytest tests/selenium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage
           
