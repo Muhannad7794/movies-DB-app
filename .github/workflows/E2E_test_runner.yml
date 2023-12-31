@@ -86,6 +86,8 @@ jobs:
       - name: Start React Server
         run: |
           cd frontend_movies_db 
+          export HOST=localhost 
+          export PORT=3307
           npm start &
           sleep 10
 
