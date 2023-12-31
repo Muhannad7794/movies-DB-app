@@ -1,8 +1,8 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
 # Import the exception
@@ -21,32 +21,42 @@ def driver():
     driver.quit()
 
 
-def test_movie_ordering(driver):
-    # Navigate to the Movies window
-    driver.get("http://localhost:3307/")  # Replace with your application's URL
+def test_movies_sort_by_title(driver):
+    driver.get("http://localhost:3307/")
 
-    # Function to select an order from the dropdown and return movie titles
-    def get_movie_titles(order_value):
+    # Set order by 'title'
+    order_select = driver.find_element(By.ID, "order")
+    order_select.click()
+    driver.find_element(By.CSS_SELECTOR, "option[value='title']").click()
+
+    previous_title = None
+    index = 0
+
+    while True:
         try:
-            order_select = driver.find_element(By.ID, "order")
-            order_select.click()
-            driver.find_element(
-                By.CSS_SELECTOR, f"option[value='{order_value}']"
-            ).click()
+            # Find movie items on the page
+            movie_items = driver.find_elements(By.CLASS_NAME, "movie-item")
+            if index >= len(movie_items):
+                break  # Exit loop if no more movies to process
 
-            # Wait for the page to update with sorted movies
-            WebDriverWait(driver, 60).until(
-                EC.presence_of_element_located((By.CLASS_NAME, "movie-item"))
+            # Select the next movie item
+            movie_item = movie_items[index]
+            movie_item.click()
+
+            # Extract release year from details page
+            movie_details = WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "movie-details-text"))
+            )
+            details_text = movie_details.text
+            movie_title = WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.TAG_NAME, "h2"))
             )
 
-            # Fetch titles of the movies listed
-            movie_items = driver.find_elements(By.CLASS_NAME, "movie-item")
-            return [movie.find_element(By.TAG_NAME, "h3").text for movie in movie_items]
-        except NoSuchElementException:
-            pytest.fail(f"Failed to find element, check if the UI has changed")
+            if previous_title is not None and movie_title < previous_title:
+                pytest.fail(f"Movies are not sorted correctly by release title.")
 
-    # Verify ordering by Title
-    titles_sorted_by_title = get_movie_titles("title")
-    assert titles_sorted_by_title == sorted(
-        titles_sorted_by_title
-    ), "Movies are not sorted by title correctly"
+            previous_title = movie_title
+            driver.back()  # Navigate back to the movie list
+            index += 1
+        except NoSuchElementException:
+            pytest.fail("Could not find expected element on the page.")
