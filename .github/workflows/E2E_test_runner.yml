@@ -28,6 +28,11 @@ jobs:
         run: |
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
 
+      # Configure Debug Mode
+      - name: Set Debug Mode
+        run: |
+          echo "DEBUG=${{secrets.DEBUG}}" >> $GITHUB_ENV
+
       # add API key for the movie database
       - name: Set Movie Database API Key
         run: |
