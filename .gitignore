@@ -73,4 +73,5 @@ media/
 MEDIA_ROOT/
 posters/
 gh_actions_reports/
+theory/
 ```
