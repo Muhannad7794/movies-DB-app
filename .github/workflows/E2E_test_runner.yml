@@ -2,9 +2,9 @@ name: E2E Tests Runner
 
 on:
   push:
-    branches: [ main ]
+    branches: [ deploy ]
   pull_request:
-    branches: [ main ]
+    branches: [ deploy ]
 
 jobs:
   test:
