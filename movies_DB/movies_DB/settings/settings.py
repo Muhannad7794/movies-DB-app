@@ -2,31 +2,18 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Load environment variables from .env file
+dotenv_file = os.path.join(Path(__file__).resolve().parent.parent.parent, ".env")
+load_dotenv(dotenv_file)
+
+# Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_ROOT = os.path.join(BASE_DIR, "MEDIA_ROOT")
-DIRECTORS_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "directors")
-STUDIOS_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "studios")
-TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
+# Security settings
 SECRET_KEY = os.getenv("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
-
-ALLOWED_HOSTS = []
-
-CORS_ALLOW_ALL_ORIGINS = True
-
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -34,11 +21,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # third part apps:
+    # Third-party apps
     "rest_framework",
     "drf_spectacular",
     "corsheaders",
-    # local apps:
+    # Local apps
     "movies",
 ]
 
@@ -73,64 +60,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "movies_DB.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "movies_db",
-        "USER": os.getenv("USER"),
-        "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": os.getenv("HOST"),
-        "PORT": os.getenv("PORT"),
-        "OPTIONS": {"ssl": {"ca": os.getenv("ca")}},
-    },
-}
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
-
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-MEDIA_URL = "/media/"
+# Static and Media files
 STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+
+if DEBUG:
+    MEDIA_ROOT = os.path.join(BASE_DIR, "MEDIA_ROOT")
+    DIRECTORS_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "directors")
+    STUDIOS_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "studios")
+else:
+    # Settings for production
+    pass
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# DRF and Spectacular settings
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -145,3 +96,25 @@ SPECTACULAR_SETTINGS = {
     "SCHEMA_PATH_PREFIX": "/api/v1",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
+
+# TMDB API Key
+TMDB_API_KEY = os.getenv("TMDB_API_KEY")
+
+# Password validation settings
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
+]
