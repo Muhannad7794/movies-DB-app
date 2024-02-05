@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - movies-db-app
 on:
   push:
     branches:
-      - main
+      - deploy
   workflow_dispatch:
 
 jobs:
