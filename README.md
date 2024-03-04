@@ -1,4 +1,4 @@
 # The Movies Database App
 
 The currrent project.
-action 0
+action check E2E
