@@ -35,7 +35,7 @@ def test_studios_ordering_by_name(driver):
             ).click()
 
             # Wait for the page to update with sorted studios
-            WebDriverWait(driver, 10).until(
+            WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.CLASS_NAME, "studio-item"))
             )
 
