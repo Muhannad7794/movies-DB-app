@@ -19,6 +19,7 @@ jobs:
           python-version: "3.11.4"
 
       - name: Install Dependencies
+        working-directory: Movies_DB
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -31,7 +32,6 @@ jobs:
       #     mkdir -p certificates
       #     echo "${{ secrets.ca }}" | base64 -d > ./certificates/DigiCertGlobalRootCA.crt.pem
       #     echo "ca=./certificates/DigiCertGlobalRootCA.crt.pem" >> $GITHUB_ENV
-        
 
       - name: Set Database Environment Variables
         run: |
