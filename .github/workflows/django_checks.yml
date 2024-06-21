@@ -21,7 +21,7 @@ jobs:
           python-version: "3.11.4"
 
       - name: Install Dependencies
-        working-directory: Movies_DB
+        working-directory: movies-DB-app/Movies_DB
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
