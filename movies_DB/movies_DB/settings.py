@@ -11,6 +11,14 @@ STUDIOS_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "studios")
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 
 
+# Load environment-specific settings
+ENVIRONMENT = os.getenv("DJANGO_ENVIRONMENT", "development")
+
+if ENVIRONMENT == "production":
+    from .settings_prod import *
+else:
+    from .settings_dev import *
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -80,12 +88,12 @@ WSGI_APPLICATION = "movies_DB.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "movies_db",
+        "NAME": os.getenv("DB_NAME"),
         "USER": os.getenv("USER"),
         "PASSWORD": os.getenv("PASSWORD"),
         "HOST": os.getenv("HOST"),
         "PORT": os.getenv("PORT"),
-        "OPTIONS": {"ssl": {"ca": os.getenv("ca")}},
+        # "OPTIONS": {"ssl": {"ca": os.getenv("ca")}},
     },
 }
 

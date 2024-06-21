@@ -1,0 +1,50 @@
+# Movies_DB_app/docker-compose.yml
+version: "3.8"
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    env_file:
+      - ./.env
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${USER}
+      MYSQL_PASSWORD: ${PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    networks:
+      - movies-app-network
+
+  backend:
+    build:
+      context: ./movies_DB
+      dockerfile: Dockerfile
+    volumes:
+      - ./movies_DB:/movies-app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    networks:
+      - movies-app-network
+
+  frontend:
+    build:
+      context: ./frontend_movies_db
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend_movies_db:/frontend-dockerized
+    ports:
+      - "3000:3000"
+    networks:
+      - movies-app-network
+
+volumes:
+  db_data:
+
+networks:
+  movies-app-network:
+    driver: bridge
