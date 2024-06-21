@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     "corsheaders",
+    "storages",
     # local apps:
     "movies",
 ]
@@ -133,6 +134,9 @@ USE_TZ = True
 
 MEDIA_URL = "/media/"
 STATIC_URL = "/static/"
+
+# set static root
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

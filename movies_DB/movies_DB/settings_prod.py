@@ -18,8 +18,17 @@ DATABASES = {
 # Azure storage settings for production
 AZURE_ACCOUNT_NAME = os.getenv("AZURE_ACCOUNT_NAME")
 AZURE_ACCOUNT_KEY = os.getenv("AZURE_ACCOUNT_KEY")
-AZURE_CONTAINER = os.getenv("AZURE_CONTAINER")
+AZURE_MEDIA_CONTAINER = os.getenv("AZURE_MEDIA_CONTAINER")
+AZURE_STATIC_CONTAINER = os.getenv("AZURE_STATIC_CONTAINER")
 
+# Azure storage settings
 DEFAULT_FILE_STORAGE = "storages.backends.azure_storage.AzureStorage"
+STATICFILES_STORAGE = "storages.backends.azure_storage.AzureStorage"
 AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
-MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/"
+
+# Static files (CSS, JavaScript, images)
+MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_MEDIA_CONTAINER}/"
+STATIC_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/"
+
+# set static root
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
