@@ -2,9 +2,9 @@ name: Database Connectivity Test
 
 on:
   push:
-    branches: [main]
+    branches: [dev]
   pull_request:
-    branches: [main]
+    branches: [dev]
 
 jobs:
   database-connectivity:
@@ -23,14 +23,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Debug - Print part of the base64 string
-        run: echo "${{ secrets.ca }}" | head -c 100
+      # - name: Debug - Print part of the base64 string
+      #   run: echo "${{ secrets.ca }}" | head -c 100
 
-      - name: Decode SSL Certificate
-        run: |
-          mkdir -p certificates
-          echo "${{ secrets.ca }}" | base64 -d > ./certificates/DigiCertGlobalRootCA.crt.pem
-          echo "ca=./certificates/DigiCertGlobalRootCA.crt.pem" >> $GITHUB_ENV
+      # - name: Decode SSL Certificate
+      #   run: |
+      #     mkdir -p certificates
+      #     echo "${{ secrets.ca }}" | base64 -d > ./certificates/DigiCertGlobalRootCA.crt.pem
+      #     echo "ca=./certificates/DigiCertGlobalRootCA.crt.pem" >> $GITHUB_ENV
         
 
       - name: Set Database Environment Variables
