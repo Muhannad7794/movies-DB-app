@@ -24,6 +24,20 @@ COPY movies_DB/ /movies-app/
 COPY movies_DB/entrypoint.sh /movies-app/entrypoint.sh
 RUN chmod +x /movies-app/entrypoint.sh
 
+# Apply database migrations
+RUN if [ "$DJANGO_ENVIRONMENT" = "production" ]; then \
+    python manage.py migrate --settings=movies_DB.settings_prod; \
+    else \
+    python manage.py migrate; \
+    fi
+
+# Collect static files
+RUN if [ "$DJANGO_ENVIRONMENT" = "production" ]; then \
+    python manage.py collectstatic --noinput --settings=movies_DB.settings_prod; \
+    else \
+    python manage.py collectstatic --noinput; \
+    fi
+
 # Expose port 8000
 EXPOSE 8000
 
