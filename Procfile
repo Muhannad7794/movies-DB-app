@@ -1,1 +1,1 @@
-web: gunicorn movies_DB.wsgi --log-file -
+web: gunicorn movies_DB.movies_DB.wsgi --log-file -
