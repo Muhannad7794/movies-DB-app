@@ -17,11 +17,8 @@ services:
 
   backend:
     build:
-      context: ./movies_DB
-      dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./movies_DB:/movies-app
+      context: .
+      dockerfile: movies_DB/Dockerfile
     container_name: movies-app
     ports:
       - "8000:8000"
@@ -36,10 +33,8 @@ services:
 
   frontend:
     build:
-      context: ./frontend_movies_db
-      dockerfile: Dockerfile
-    volumes:
-      - ./frontend_movies_db:/frontend-dockerized
+      context: .
+      dockerfile: frontend_movies_db/Dockerfile
     container_name: frontend-movies-app
     ports:
       - "3000:3000"

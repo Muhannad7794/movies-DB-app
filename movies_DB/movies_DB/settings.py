@@ -1,6 +1,10 @@
+# Movies_DB/settings.py:
+
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import logging
+from azure.storage.blob import BlobServiceClient, ContainerClient
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -157,3 +161,17 @@ SPECTACULAR_SETTINGS = {
     "SCHEMA_PATH_PREFIX": "/api/v1",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+
+# logging setup:
+logger = logging.getLogger("django")
+
+try:
+    blob_service_client = BlobServiceClient.from_connection_string(
+        f"DefaultEndpointsProtocol=https;AccountName={AZURE_ACCOUNT_NAME};AccountKey={AZURE_ACCOUNT_KEY};EndpointSuffix=core.windows.net"
+    )
+    container_client = blob_service_client.get_container_client(AZURE_STATIC_CONTAINER)
+    if not container_client.exists():
+        container_client.create_container()
+except Exception as e:
+    logger.error(f"Error setting up Azure Storage: {e}")

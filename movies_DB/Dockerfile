@@ -10,15 +10,18 @@ ENV PYTHONUNBUFFERED=1
 # Set work directory
 WORKDIR /movies-app
 
+# Copy the .env file from the root directory to the work directory
+COPY ../.env /movies-app/
+
 # Copy requirements.txt and install dependencies
-COPY requirements.txt /movies-app/
+COPY movies_DB/requirements.txt /movies-app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire backend project
-COPY . /movies-app/
+COPY movies_DB/ /movies-app/
 
 # Copy entrypoint script and set permissions
-COPY entrypoint.sh /movies-app/entrypoint.sh
+COPY movies_DB/entrypoint.sh /movies-app/entrypoint.sh
 RUN chmod +x /movies-app/entrypoint.sh
 
 # Expose port 8000
