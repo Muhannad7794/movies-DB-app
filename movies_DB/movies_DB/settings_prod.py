@@ -50,4 +50,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Custom storage backends
 DEFAULT_FILE_STORAGE = "movies_DB.storage_backends.AzureMediaStorage"
-STATICFILES_STORAGE = "movies_DB.storage_backends.AzureStaticStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
