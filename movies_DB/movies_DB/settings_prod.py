@@ -3,7 +3,10 @@ import os
 from django.core.exceptions import ImproperlyConfigured
 
 DEBUG = False
-ALLOWED_HOSTS = ["*"]  
+ALLOWED_HOSTS = ["*"]
+
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
 
 DATABASES = {
     "default": {
@@ -37,16 +40,14 @@ print(f"AZURE_ACCOUNT_KEY: {AZURE_ACCOUNT_KEY}")
 print(f"AZURE_MEDIA_CONTAINER: {AZURE_MEDIA_CONTAINER}")
 print(f"AZURE_STATIC_CONTAINER: {AZURE_STATIC_CONTAINER}")
 
-DEFAULT_FILE_STORAGE = "storages.backends.azure_storage.AzureStorage"
-STATICFILES_STORAGE = "storages.backends.azure_storage.AzureStorage"
-
 AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
+
 MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_MEDIA_CONTAINER}/"
 STATIC_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# Azure Storage settings
-AZURE_ACCOUNT_NAME = os.getenv("AZURE_ACCOUNT_NAME")
-AZURE_ACCOUNT_KEY = os.getenv("AZURE_ACCOUNT_KEY")
-AZURE_CONTAINER = os.getenv("AZURE_STATIC_CONTAINER")
+# Custom storage backends
+DEFAULT_FILE_STORAGE = "movies_DB.storage_backends.AzureMediaStorage"
+STATICFILES_STORAGE = "movies_DB.storage_backends.AzureStaticStorage"
