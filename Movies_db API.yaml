@@ -1,0 +1,1237 @@
+openapi: 3.0.3
+info:
+  title: Movies_db API
+  version: 1.0.0
+  description: A simple API to list movies and their directors
+paths:
+  /movies/directors/:
+    get:
+      operationId: movies_directors_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Directors'
+          description: ''
+    post:
+      operationId: movies_directors_create
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Directors'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Directors'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Directors'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Directors'
+          description: ''
+  /movies/directors-images/:
+    get:
+      operationId: movies_directors_images_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DirectorsImages'
+          description: ''
+    post:
+      operationId: movies_directors_images_create
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DirectorsImages'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DirectorsImages'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DirectorsImages'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectorsImages'
+          description: ''
+  /movies/directors-images/{id}/:
+    get:
+      operationId: movies_directors_images_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this directors images.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectorsImages'
+          description: ''
+    put:
+      operationId: movies_directors_images_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this directors images.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DirectorsImages'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DirectorsImages'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DirectorsImages'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectorsImages'
+          description: ''
+    patch:
+      operationId: movies_directors_images_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this directors images.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDirectorsImages'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDirectorsImages'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDirectorsImages'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectorsImages'
+          description: ''
+    delete:
+      operationId: movies_directors_images_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this directors images.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /movies/directors/{id}/:
+    get:
+      operationId: movies_directors_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this directors.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Directors'
+          description: ''
+    put:
+      operationId: movies_directors_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this directors.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Directors'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Directors'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Directors'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Directors'
+          description: ''
+    patch:
+      operationId: movies_directors_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this directors.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDirectors'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDirectors'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDirectors'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Directors'
+          description: ''
+    delete:
+      operationId: movies_directors_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this directors.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /movies/movies/:
+    get:
+      operationId: movies_movies_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovieInfo'
+          description: ''
+    post:
+      operationId: movies_movies_create
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MovieInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MovieInfo'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieInfo'
+          description: ''
+  /movies/movies/{movie_id}/recommendations/:
+    get:
+      operationId: movies_movies_recommendations_retrieve
+      parameters:
+      - in: path
+        name: movie_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /movies/movies/{id}/:
+    get:
+      operationId: movies_movies_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this movie info.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieInfo'
+          description: ''
+    put:
+      operationId: movies_movies_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this movie info.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MovieInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MovieInfo'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieInfo'
+          description: ''
+    patch:
+      operationId: movies_movies_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this movie info.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMovieInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMovieInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMovieInfo'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieInfo'
+          description: ''
+    delete:
+      operationId: movies_movies_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this movie info.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /movies/posters/:
+    get:
+      operationId: movies_posters_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posters'
+          description: ''
+    post:
+      operationId: movies_posters_create
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Posters'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Posters'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Posters'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posters'
+          description: ''
+  /movies/posters/{id}/:
+    get:
+      operationId: movies_posters_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this posters.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posters'
+          description: ''
+    put:
+      operationId: movies_posters_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this posters.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Posters'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Posters'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Posters'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posters'
+          description: ''
+    patch:
+      operationId: movies_posters_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this posters.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPosters'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPosters'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPosters'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posters'
+          description: ''
+    delete:
+      operationId: movies_posters_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this posters.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /movies/studios/:
+    get:
+      operationId: movies_studios_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Studios'
+          description: ''
+    post:
+      operationId: movies_studios_create
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Studios'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Studios'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Studios'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Studios'
+          description: ''
+  /movies/studios-images/:
+    get:
+      operationId: movies_studios_images_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StudiosImages'
+          description: ''
+    post:
+      operationId: movies_studios_images_create
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudiosImages'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudiosImages'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudiosImages'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudiosImages'
+          description: ''
+  /movies/studios-images/{id}/:
+    get:
+      operationId: movies_studios_images_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this studios images.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudiosImages'
+          description: ''
+    put:
+      operationId: movies_studios_images_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this studios images.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudiosImages'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StudiosImages'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StudiosImages'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudiosImages'
+          description: ''
+    patch:
+      operationId: movies_studios_images_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this studios images.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStudiosImages'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStudiosImages'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStudiosImages'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudiosImages'
+          description: ''
+    delete:
+      operationId: movies_studios_images_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this studios images.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /movies/studios/{id}/:
+    get:
+      operationId: movies_studios_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this studios.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Studios'
+          description: ''
+    put:
+      operationId: movies_studios_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this studios.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Studios'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Studios'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Studios'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Studios'
+          description: ''
+    patch:
+      operationId: movies_studios_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this studios.
+        required: true
+      tags:
+      - movies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStudios'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStudios'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStudios'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Studios'
+          description: ''
+    delete:
+      operationId: movies_studios_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this studios.
+        required: true
+      tags:
+      - movies
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Directors:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        picture_url:
+          type: string
+          readOnly: true
+        director_name:
+          type: string
+          maxLength: 100
+        nationality:
+          type: string
+          maxLength: 100
+        director_date_of_birth:
+          type: string
+          format: date
+        director_best_movies:
+          type: string
+          maxLength: 215
+        awards:
+          type: string
+          maxLength: 100
+      required:
+      - awards
+      - director_best_movies
+      - director_date_of_birth
+      - director_name
+      - id
+      - nationality
+      - picture_url
+    DirectorsImages:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        picture:
+          type: string
+          format: uri
+        director:
+          type: integer
+      required:
+      - director
+      - id
+      - picture
+    MovieInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        director:
+          allOf:
+          - $ref: '#/components/schemas/Directors'
+          readOnly: true
+        studio:
+          allOf:
+          - $ref: '#/components/schemas/Studios'
+          readOnly: true
+        poster_url:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 100
+        genre:
+          type: string
+          maxLength: 100
+        release_year:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        credits_score:
+          type: number
+          format: double
+      required:
+      - credits_score
+      - director
+      - genre
+      - id
+      - poster_url
+      - release_year
+      - studio
+      - title
+    PatchedDirectors:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        picture_url:
+          type: string
+          readOnly: true
+        director_name:
+          type: string
+          maxLength: 100
+        nationality:
+          type: string
+          maxLength: 100
+        director_date_of_birth:
+          type: string
+          format: date
+        director_best_movies:
+          type: string
+          maxLength: 215
+        awards:
+          type: string
+          maxLength: 100
+    PatchedDirectorsImages:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        picture:
+          type: string
+          format: uri
+        director:
+          type: integer
+    PatchedMovieInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        director:
+          allOf:
+          - $ref: '#/components/schemas/Directors'
+          readOnly: true
+        studio:
+          allOf:
+          - $ref: '#/components/schemas/Studios'
+          readOnly: true
+        poster_url:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 100
+        genre:
+          type: string
+          maxLength: 100
+        release_year:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        credits_score:
+          type: number
+          format: double
+    PatchedPosters:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        poster:
+          type: string
+          format: uri
+        movie:
+          type: integer
+    PatchedStudios:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        picture_url:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        founded:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        location:
+          type: string
+          maxLength: 100
+    PatchedStudiosImages:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        picture:
+          type: string
+          format: uri
+        studio:
+          type: integer
+    Posters:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        poster:
+          type: string
+          format: uri
+        movie:
+          type: integer
+      required:
+      - id
+      - movie
+      - poster
+    Studios:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        picture_url:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        founded:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        location:
+          type: string
+          maxLength: 100
+      required:
+      - founded
+      - id
+      - location
+      - name
+      - picture_url
+    StudiosImages:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        picture:
+          type: string
+          format: uri
+        studio:
+          type: integer
+      required:
+      - id
+      - picture
+      - studio
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
