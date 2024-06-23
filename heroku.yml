@@ -1,4 +1,4 @@
-build:
+uild:
   docker:
     backend:
       dockerfile: movies_DB/Dockerfile
@@ -7,17 +7,8 @@ build:
   config:
     DJANGO_ENVIRONMENT: production
 
-release:
-  command:
-    - python manage.py migrate
-    - python manage.py collectstatic --noinput --clear
+# release command removed
 
 run:
-  web:
-    command:
-      - gunicorn movies_DB.wsgi:application --bind 0.0.0.0:8000 --log-level debug --capture-output --timeout 120
-    image: backend
-  frontend:
-    command:
-      - serve -s build
-    image: frontend
+  backend: gunicorn movies_DB.wsgi:application --bind 0.0.0.0:8000 --log-level debug --capture-output --timeout 120
+  frontend: serve -s build
