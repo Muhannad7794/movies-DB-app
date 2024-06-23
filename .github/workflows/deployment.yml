@@ -33,7 +33,12 @@ jobs:
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
           echo "DEBUG=False" >> $GITHUB_ENV
           echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> $GITHUB_ENV
-          echo "REACT_APP_API_URL=https://movies-db-app-9028b9d60784.herokuapp.com" >> $GITHUB_ENV
+
+      - name: Debug Environment Variables
+        run: |
+          echo "DB_NAME=$DB_NAME"
+          echo "AZURE_ACCOUNT_NAME=$AZURE_ACCOUNT_NAME"
+          echo "ALLOWED_HOSTS=$ALLOWED_HOSTS"
 
       - name: Login to Heroku Container Registry
         run: heroku container:login
