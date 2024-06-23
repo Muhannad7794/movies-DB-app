@@ -1,0 +1,5 @@
+# Ensure that shell scripts have LF line endings on checkout
+*.sh text eol=lf
+
+# Ensure all text files have proper line endings automatically
+* text=auto

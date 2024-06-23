@@ -25,7 +25,7 @@ services:
     env_file:
       - ./.env
     environment:
-      DJANGO_ENVIRONMENT: production # Set to production
+      DJANGO_ENVIRONMENT: production
     depends_on:
       - db
     networks:
@@ -38,6 +38,9 @@ services:
     container_name: frontend-movies-app
     ports:
       - "3000:3000"
+    environment:
+      #REACT_APP_API_URL: https://movies-db-app-9028b9d60784.herokuapp.com
+      REACT_APP_API_URL: http://localhost:8000
     networks:
       - movies-app-network
 
