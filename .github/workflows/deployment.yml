@@ -48,23 +48,78 @@ jobs:
           docker push registry.heroku.com/fe-movies-db/web
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          AZURE_ACCOUNT_NAME: ${{ secrets.AZURE_ACCOUNT_NAME }}
+          AZURE_ACCOUNT_KEY: ${{ secrets.AZURE_ACCOUNT_KEY }}
+          AZURE_MEDIA_CONTAINER: ${{ secrets.AZURE_MEDIA_CONTAINER }}
+          AZURE_STATIC_CONTAINER: ${{ secrets.AZURE_STATIC_CONTAINER }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+          CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: "False"
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
 
       - name: Release Backend Container
         run: heroku container:release web --app movies-db-app
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          AZURE_ACCOUNT_NAME: ${{ secrets.AZURE_ACCOUNT_NAME }}
+          AZURE_ACCOUNT_KEY: ${{ secrets.AZURE_ACCOUNT_KEY }}
+          AZURE_MEDIA_CONTAINER: ${{ secrets.AZURE_MEDIA_CONTAINER }}
+          AZURE_STATIC_CONTAINER: ${{ secrets.AZURE_STATIC_CONTAINER }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+          CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: "False"
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
 
       - name: Release Frontend Container
         run: heroku container:release web --app fe-movies-db
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          AZURE_ACCOUNT_NAME: ${{ secrets.AZURE_ACCOUNT_NAME }}
+          AZURE_ACCOUNT_KEY: ${{ secrets.AZURE_ACCOUNT_KEY }}
+          AZURE_MEDIA_CONTAINER: ${{ secrets.AZURE_MEDIA_CONTAINER }}
+          AZURE_STATIC_CONTAINER: ${{ secrets.AZURE_STATIC_CONTAINER }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+          CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: "False"
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
 
       - name: Execute Migrations
         run: heroku run python manage.py migrate --app movies-db-app
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          AZURE_ACCOUNT_NAME: ${{ secrets.AZURE_ACCOUNT_NAME }}
+          AZURE_ACCOUNT_KEY: ${{ secrets.AZURE_ACCOUNT_KEY }}
+          AZURE_MEDIA_CONTAINER: ${{ secrets.AZURE_MEDIA_CONTAINER }}
+          AZURE_STATIC_CONTAINER: ${{ secrets.AZURE_STATIC_CONTAINER }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+          CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: "False"
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
 
       - name: Collect Static Files
         run: heroku run python manage.py collectstatic --noinput --app movies-db-app
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          AZURE_ACCOUNT_NAME: ${{ secrets.AZURE_ACCOUNT_NAME }}
+          AZURE_ACCOUNT_KEY: ${{ secrets.AZURE_ACCOUNT_KEY }}
+          AZURE_MEDIA_CONTAINER: ${{ secrets.AZURE_MEDIA_CONTAINER }}
+          AZURE_STATIC_CONTAINER: ${{ secrets.AZURE_STATIC_CONTAINER }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+          CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: "False"
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
