@@ -3,89 +3,68 @@ name: Deploy The Application to Heroku
 on:
   push:
     branches:
-      - main
+      - main # This workflow is triggered on pushes to the main branch
 
 jobs:
-  build_and_deploy_backend:
-    runs-on: ubuntu-latest
+  build_and_deploy:
+    runs-on: ubuntu-latest # The runner that will execute the workflow
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 # Check out the current repository to the runner
 
-      - name: Set Environment Variables
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Create .env file
         run: |
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
-          echo "PASSWORD=${{ secrets.PASSWORD }}" >> $GITHUB_ENV
-          echo "DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}" >> $GITHUB_ENV
-          echo "USER=${{ secrets.USER }}" >> $GITHUB_ENV
-          echo "AZURE_ACCOUNT_NAME=${{ secrets.AZURE_ACCOUNT_NAME }}" >> $GITHUB_ENV
-          echo "AZURE_ACCOUNT_KEY=${{ secrets.AZURE_ACCOUNT_KEY }}" >> $GITHUB_ENV
-          echo "AZURE_MEDIA_CONTAINER=${{ secrets.AZURE_MEDIA_CONTAINER }}" >> $GITHUB_ENV
-          echo "AZURE_STATIC_CONTAINER=${{ secrets.AZURE_STATIC_CONTAINER }}" >> $GITHUB_ENV
-          echo "ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}" >> $GITHUB_ENV
-          echo "CORS_ALLOWED_ORIGINS=${{ secrets.CORS_ALLOWED_ORIGINS }}" >> $GITHUB_ENV
-          echo "HOST=${{ secrets.HOST }}" >> $GITHUB_ENV
-          echo "PORT=${{ secrets.PORT }}" >> $GITHUB_ENV
-          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
-          echo "DEBUG=False" >> $GITHUB_ENV
-          echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> $GITHUB_ENV
-
-      - name: Debug Environment Variables
-        run: |
-          echo "DB_NAME=$DB_NAME"
-          echo "AZURE_ACCOUNT_NAME=$AZURE_ACCOUNT_NAME"
-          echo "ALLOWED_HOSTS=$ALLOWED_HOSTS"
-
+          touch .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+          echo "PASSWORD=${{ secrets.PASSWORD }}" >> .env
+          echo "DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}" >> .env
+          echo "USER=${{ secrets.USER }}" >> .env
+          echo "AZURE_ACCOUNT_NAME=${{ secrets.AZURE_ACCOUNT_NAME }}" >> .env
+          echo "AZURE_ACCOUNT_KEY=${{ secrets.AZURE_ACCOUNT_KEY }}" >> .env
+          echo "AZURE_MEDIA_CONTAINER=${{ secrets.AZURE_MEDIA_CONTAINER }}" >> .env
+          echo "AZURE_STATIC_CONTAINER=${{ secrets.AZURE_STATIC_CONTAINER }}" >> .env
+          echo "ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}" >> .env
+          echo "CORS_ALLOWED_ORIGINS=${{ secrets.CORS_ALLOWED_ORIGINS }}" >> .env
+          echo "HOST=${{ secrets.HOST }}" >> .env
+          echo "PORT=${{ secrets.PORT }}" >> .env
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+          echo "DEBUG=False" >> .env
+          echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> .env
       - name: Login to Heroku Container Registry
         run: heroku container:login
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }} # Log in to Heroku Docker registry
 
-      - name: Build and Push Backend Docker Container
+      - name: Build and Push Docker Containers
         run: |
-          docker build --build-arg DB_NAME=$DB_NAME --build-arg PASSWORD=$PASSWORD --build-arg DB_ROOT_PASSWORD=$DB_ROOT_PASSWORD --build-arg USER=$USER --build-arg AZURE_ACCOUNT_NAME=$AZURE_ACCOUNT_NAME --build-arg AZURE_ACCOUNT_KEY=$AZURE_ACCOUNT_KEY --build-arg AZURE_MEDIA_CONTAINER=$AZURE_MEDIA_CONTAINER --build-arg AZURE_STATIC_CONTAINER=$AZURE_STATIC_CONTAINER --build-arg ALLOWED_HOSTS=$ALLOWED_HOSTS --build-arg CORS_ALLOWED_ORIGINS=$CORS_ALLOWED_ORIGINS --build-arg HOST=$HOST --build-arg PORT=$PORT --build-arg SECRET_KEY=$SECRET_KEY --build-arg DEBUG=$DEBUG --build-arg TMDB_API_KEY=$TMDB_API_KEY -t movies-db-app_backend -f movies_DB/Dockerfile .
+          docker-compose -f docker-compose.prod.yml build
           docker tag movies-db-app_backend registry.heroku.com/movies-db-app/web
           docker push registry.heroku.com/movies-db-app/web
+          docker tag movies-db-app_frontend registry.heroku.com/fe-movies-db/web
+          docker push registry.heroku.com/fe-movies-db/web
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
       - name: Release Backend Container
         run: heroku container:release web --app movies-db-app
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
+      - name: Release Frontend Container
+        run: heroku container:release web --app fe-movies-db
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
       - name: Execute Migrations
-        run: |
-          heroku run --app movies-db-app "echo $DB_NAME"
-          heroku run --app movies-db-app "echo $AZURE_ACCOUNT_NAME"
-          heroku run --app movies-db-app "echo $ALLOWED_HOSTS"
-          heroku run python manage.py migrate --app movies-db-app
+        run: heroku run python manage.py migrate --app movies-db-app
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
       - name: Collect Static Files
         run: heroku run python manage.py collectstatic --noinput --app movies-db-app
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-
-  build_and_deploy_frontend:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Login to Heroku Container Registry
-        run: heroku container:login
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-
-      - name: Build and Push Frontend Docker Container
-        run: |
-          docker build -t movies-db-app_frontend -f frontend_movies_db/Dockerfile .
-          docker tag movies-db-app_frontend registry.heroku.com/fe-movies-db/web
-          docker push registry.heroku.com/fe-movies-db/web
-
-      - name: Release Frontend Container
-        run: heroku container:release web --app fe-movies-db
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
