@@ -23,7 +23,8 @@ jobs:
 
       - name: Build and Push Backend Docker Container
         run: |
-          docker build --file movies_DB/Dockerfile --tag registry.heroku.com/movies-db-app/web .
+          docker-compose -f docker-compose.prod.yml build backend
+          docker tag movies-db-app_backend registry.heroku.com/movies-db-app/web
           docker push registry.heroku.com/movies-db-app/web
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -31,10 +32,16 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           DB_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
           USER: ${{ secrets.USER }}
+          AZURE_ACCOUNT_NAME: ${{ secrets.AZURE_ACCOUNT_NAME }}
+          AZURE_ACCOUNT_KEY: ${{ secrets.AZURE_ACCOUNT_KEY }}
+          AZURE_MEDIA_CONTAINER: ${{ secrets.AZURE_MEDIA_CONTAINER }}
+          AZURE_STATIC_CONTAINER: ${{ secrets.AZURE_STATIC_CONTAINER }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
 
       - name: Build and Push Frontend Docker Container
         run: |
-          docker build --file frontend_movies_db/Dockerfile --tag registry.heroku.com/fe-movies-db/web .
+          docker-compose -f docker-compose.prod.yml build frontend
+          docker tag movies-db-app_frontend registry.heroku.com/fe-movies-db/web
           docker push registry.heroku.com/fe-movies-db/web
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
