@@ -1,6 +1,7 @@
 from .settings import *
 import os
 from django.core.exceptions import ImproperlyConfigured
+from corsheaders.defaults import default_headers
 
 DEBUG = False
 ALLOWED_HOSTS = [
