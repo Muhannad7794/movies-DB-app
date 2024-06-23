@@ -16,31 +16,29 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
+      - name: Create .env file
+        run: |
+          touch .env
+          echo DB_NAME=${{ secrets.DB_NAME }} >> .env
+          echo PASSWORD=${{ secrets.PASSWORD }} >> .env
+          echo DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }} >> .env
+          echo USER=${{ secrets.USER }} >> .env
+          echo AZURE_ACCOUNT_NAME=${{ secrets.AZURE_ACCOUNT_NAME }} >> .env
+          echo AZURE_ACCOUNT_KEY=${{ secrets.AZURE_ACCOUNT_KEY }} >> .env
+          echo AZURE_MEDIA_CONTAINER=${{ secrets.AZURE_MEDIA_CONTAINER }} >> .env
+          echo AZURE_STATIC_CONTAINER=${{ secrets.AZURE_STATIC_CONTAINER }} >> .env
+          echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }} >> .env
+
       - name: Login to Heroku Container Registry
         run: heroku container:login
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }} # Log in to Heroku Docker registry
 
-      - name: Build and Push Backend Docker Container
+      - name: Build and Push Docker Containers
         run: |
-          docker-compose -f docker-compose.prod.yml build backend
+          docker-compose -f docker-compose.prod.yml build
           docker tag movies-db-app_backend registry.heroku.com/movies-db-app/web
           docker push registry.heroku.com/movies-db-app/web
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          DB_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
-          USER: ${{ secrets.USER }}
-          AZURE_ACCOUNT_NAME: ${{ secrets.AZURE_ACCOUNT_NAME }}
-          AZURE_ACCOUNT_KEY: ${{ secrets.AZURE_ACCOUNT_KEY }}
-          AZURE_MEDIA_CONTAINER: ${{ secrets.AZURE_MEDIA_CONTAINER }}
-          AZURE_STATIC_CONTAINER: ${{ secrets.AZURE_STATIC_CONTAINER }}
-          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-
-      - name: Build and Push Frontend Docker Container
-        run: |
-          docker-compose -f docker-compose.prod.yml build frontend
           docker tag movies-db-app_frontend registry.heroku.com/fe-movies-db/web
           docker push registry.heroku.com/fe-movies-db/web
         env:
@@ -61,7 +59,7 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
-      - name: Collect static files
+      - name: Collect Static Files
         run: heroku run python manage.py collectstatic --noinput --app movies-db-app
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
