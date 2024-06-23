@@ -1,6 +1,6 @@
 build:
   docker:
-    backend:
+    web:
       dockerfile: movies_DB/Dockerfile
     frontend:
       dockerfile: frontend_movies_db/Dockerfile
@@ -9,18 +9,16 @@ build:
     REACT_APP_API_URL: https://movies-db-app-9028b9d60784.herokuapp.com
 
 release:
-  image: backend
+  image: web
   command:
     - python manage.py collectstatic --noinput
     - python manage.py migrate
 
 run:
-  backend:
-    type: web
+  web:
+    image: web
     command: gunicorn movies_DB.wsgi --bind 0.0.0.0:8000
-    port: 8000
 
   frontend:
-    type: web
+    image: frontend
     command: npm start --prefix frontend_movies_db
-    port: 3000
