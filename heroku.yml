@@ -1,6 +1,6 @@
 build:
   docker:
-    web:
+    backend:
       dockerfile: movies_DB/Dockerfile
     frontend:
       dockerfile: frontend_movies_db/Dockerfile
@@ -14,8 +14,10 @@ release:
 
 run:
   web:
-    image: web
-    command: gunicorn movies_DB.wsgi:application --bind 0.0.0.0:8000 --log-level debug --capture-output --timeout 120
+    command:
+      - gunicorn movies_DB.wsgi:application --bind 0.0.0.0:8000 --log-level debug --capture-output --timeout 120
+    image: backend
   frontend:
+    command:
+      - serve -s build
     image: frontend
-    command: serve -s build
