@@ -1,3 +1,3 @@
 # The Movies Database App
 
-attempt lostCount
+attempt withKira
