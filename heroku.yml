@@ -1,4 +1,4 @@
-uild:
+build:
   docker:
     backend:
       dockerfile: movies_DB/Dockerfile
@@ -6,9 +6,21 @@ uild:
       dockerfile: frontend_movies_db/Dockerfile
   config:
     DJANGO_ENVIRONMENT: production
+    REACT_APP_API_URL: https://movies-db-app-9028b9d60784.herokuapp.com
 
-# release command removed
+release:
+  image: backend
+  command:
+    - python manage.py collectstatic --noinput
+    - python manage.py migrate
 
 run:
-  backend: gunicorn movies_DB.wsgi:application --bind 0.0.0.0:8000 --log-level debug --capture-output --timeout 120
-  frontend: serve -s build
+  backend:
+    type: web
+    command: gunicorn movies_DB.wsgi --bind 0.0.0.0:8000
+    port: 8000
+
+  frontend:
+    type: web
+    command: npm start --prefix frontend_movies_db
+    port: 3000
