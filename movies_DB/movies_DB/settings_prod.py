@@ -3,10 +3,19 @@ import os
 from django.core.exceptions import ImproperlyConfigured
 
 DEBUG = False
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "https://movies-db-app-9028b9d60784.herokuapp.com",
+    "fe-movies-db-7ebb932d51fd.herokuapp.com",
+]
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://fe-movies-db-7ebb932d51fd.herokuapp.com",
+]
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "content-type",
+]
 
 DATABASES = {
     "default": {

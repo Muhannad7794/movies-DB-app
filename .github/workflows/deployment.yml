@@ -28,6 +28,12 @@ jobs:
           echo AZURE_MEDIA_CONTAINER=${{ secrets.AZURE_MEDIA_CONTAINER }} >> .env
           echo AZURE_STATIC_CONTAINER=${{ secrets.AZURE_STATIC_CONTAINER }} >> .env
           echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }} >> .env
+          echo CORS_ALLOWED_ORIGINS=${{ secrets.CORS_ALLOWED_ORIGINS }} >> .env
+          echo HOST=${{ secrets.HOST }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
+          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
+          echo DEBUG=False >> .env
+          echo TMDB_API_KEY=${{ secrets.TMDB_API_KEY }} >> .env
 
       - name: Login to Heroku Container Registry
         run: heroku container:login
