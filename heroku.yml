@@ -1,7 +1,11 @@
 build:
   docker:
-    web: movies_DB/Dockerfile
-    frontend: frontend_movies_db/Dockerfile
+    web:
+      dockerfile: movies_DB/Dockerfile
+      context: .
+    frontend:
+      dockerfile: frontend_movies_db/Dockerfile
+      context: .
   config:
     DJANGO_ENVIRONMENT: production
 
