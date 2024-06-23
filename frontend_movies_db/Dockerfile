@@ -5,12 +5,11 @@ FROM node:18
 WORKDIR /frontend-dockerized
 
 # Install dependencies
-COPY frontend_movies_db/package.json /frontend-dockerized/
-COPY frontend_movies_db/package-lock.json /frontend-dockerized/
+COPY frontend_movies_db/package.json frontend_movies_db/package-lock.json ./
 RUN npm install
 
 # Copy project
-COPY frontend_movies_db/ /frontend-dockerized/
+COPY frontend_movies_db/ ./
 
 # Build the project
 RUN npm run build
