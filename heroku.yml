@@ -7,12 +7,9 @@ build:
   config:
     DJANGO_ENVIRONMENT: production
 
-release:
-  backend:
+run:
+  web: gunicorn movies_DB.wsgi:application --bind 0.0.0.0:8000 --log-level debug --capture-output --timeout 120
+  release:
     command:
       - python manage.py migrate
       - python manage.py collectstatic --noinput --clear
-
-run:
-  backend: gunicorn movies_DB.wsgi:application --bind 0.0.0.0:8000 --log-level debug --capture-output --timeout 120
-  frontend: serve -s frontend-dockerized/build
